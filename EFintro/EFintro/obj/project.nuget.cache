@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tSmCqYxdS+E9pRdDMAhkA/GWIY/F7eHtoW/AoRo8xGXqhg5WmDFaL4LJ885FG24TaQ//QFMg1bUOKlymxLecLQ==",
+  "dgSpecHash": "7cVZrgAEWiHBzd+bYkHJbDvLa+Eesnklff+ATU9+xG+FtNWzg+89J8jTL6cjZEp969Oi4wRw2c648vVNu8oHmw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\MyWorkDB\\EFintro\\EFintro\\EFintro.csproj",
+  "projectFilePath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\EFintro\\EFintro\\EFintro.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\toksi\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\toksi\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

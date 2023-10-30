@@ -2900,11 +2900,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\MyWorkDB\\EFintro\\EFintro\\EFintro.csproj",
+      "projectUniqueName": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\EFintro\\EFintro\\EFintro.csproj",
       "projectName": "EFintro",
-      "projectPath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\MyWorkDB\\EFintro\\EFintro\\EFintro.csproj",
+      "projectPath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\EFintro\\EFintro\\EFintro.csproj",
       "packagesPath": "C:\\Users\\toksi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\MyWorkDB\\EFintro\\EFintro\\obj\\",
+      "outputPath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\EFintro\\EFintro\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
