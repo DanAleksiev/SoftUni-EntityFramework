@@ -159,36 +159,15 @@ namespace SoftUni
         //8
         public static string GetAddressesByTown(SoftUniContext context)
             {
-            Address address = new Address()
-                {
-                AddressText = "Vitoshka 15",
-                TownId = 4
-                };
-
-            var employee = context.Employees.FirstOrDefault(e => e.LastName == "Nakov");
-
-            employee.Address = address;
-
-            context.SaveChanges();
-
-            var employees = context.Employees
-                .Select(e => new
-                    {
-                    e.AddressId,
-                    e.Address.AddressText
-                    })
-                .OrderByDescending(e => e.AddressId)
+            string[] employees = context.Addresses
                 .Take(10)
-                .ToList();
+                .OrderByDescending(a => a.Employees.Count)
+                .ThenBy(a => a.Town.Name)
+                .ThenBy(a => a.AddressText)
+                .Select(a => $"{a.AddressText}, {a.Town.Name} - {a.Employees.Count} employees")
+                .ToArray();
 
-            StringBuilder sb = new StringBuilder();
-            foreach (var e in employees)
-                {
-                sb.AppendLine(e.AddressText);
-                }
-
-            string result = sb.ToString().Trim();
-            return result;
+            return string.Join(Environment.NewLine, employees);
             }
         }
     }
