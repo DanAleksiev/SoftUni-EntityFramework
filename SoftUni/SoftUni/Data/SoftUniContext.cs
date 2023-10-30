@@ -22,7 +22,7 @@ namespace SoftUni.Data
         public virtual DbSet<Employee> Employees { get; set; } = null!;
         public virtual DbSet<Project> Projects { get; set; } = null!;
         public virtual DbSet<Town> Towns { get; set; } = null!;
-        public virtual DbSet<EmployeeProject> EmployeeProjects { get; set; }
+        public virtual DbSet<EmployeeProject> EmployeesProjects { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
