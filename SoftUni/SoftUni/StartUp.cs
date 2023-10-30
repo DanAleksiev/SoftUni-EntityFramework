@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SoftUni.Data;
 using SoftUni.Models;
+using System.Globalization;
 using System.Text;
+using System.Xml.Linq;
 
 namespace SoftUni
     {
@@ -18,7 +20,7 @@ namespace SoftUni
 
             SoftUniContext context = new SoftUniContext();
 
-            string output = AddNewAddressToEmployee(context);
+            string output = GetAddressesByTown(context);
             Console.WriteLine(output);
             }
         //3
@@ -116,7 +118,46 @@ namespace SoftUni
             }
 
         //7
-        public static string AddNewAddressToEmployee(SoftUniContext context)
+        public static string GetEmployeesInPeriod(SoftUniContext context)
+            {
+            var employees = context.Employees
+                .Take(10)
+                .Select(e => new
+                    {
+                    e.FirstName,
+                    e.LastName,
+                    ManagerFirstName = e.Manager.FirstName,
+                    ManagerLastName = e.Manager.LastName,
+                    Projects = e.EmployeesProjects
+                        .Where(ep => ep.Project.StartDate.Year >= 2001 && ep.Project.StartDate.Year <= 2003)
+                        .Select(ep => new
+                            {
+                            ProjectName = ep.Project.Name,
+                            StartDate = ep.Project.StartDate.ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture),
+                            EndDate = ep.Project.EndDate.ToString != null
+                                ? ep.Project.EndDate.Value.ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture)
+                                : "not finished"
+                            })
+                    });
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var e in employees.ToList())
+                {
+                sb.AppendLine($"{e.FirstName} {e.LastName} - Manager: {e.ManagerFirstName} {e.ManagerLastName}");
+
+                if (e.Projects.Any())
+                    {
+                    sb.AppendLine(string.Join(Environment.NewLine, e.Projects
+                        .Select(p => $"--{p.ProjectName} - {p.StartDate} - {p.EndDate}")));
+                    }
+                }
+
+            string result = sb.ToString().Trim();
+            return result;
+            }
+
+        //8
+        public static string GetAddressesByTown(SoftUniContext context)
             {
             Address address = new Address()
                 {
@@ -149,6 +190,5 @@ namespace SoftUni
             string result = sb.ToString().Trim();
             return result;
             }
-
         }
     }
