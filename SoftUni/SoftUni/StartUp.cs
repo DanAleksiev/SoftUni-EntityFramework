@@ -20,7 +20,7 @@ namespace SoftUni
 
             SoftUniContext context = new SoftUniContext();
 
-            string output = GetEmployeesByFirstNameStartingWithSa(context);
+            string output = RemoveTown(context);
             Console.WriteLine(output);
             }
         //3
@@ -321,28 +321,50 @@ namespace SoftUni
         //14
         public static string DeleteProjectById(SoftUniContext context)
             {
-            decimal modifier = 1.12m;
 
-            var employees = context.Employees
-                .Where(e => e.FirstName.StartsWith("Sa"))
-                .Select(e => new
-                    {
-                    e.FirstName,
-                    e.LastName,
-                    e.JobTitle,
-                    e.Salary
-                    })
-                .OrderBy(e => e.FirstName)
-                .ThenBy(e => e.LastName)
-                .ToList();
+            var project = context.Projects
+                .Where(e => e.ProjectId == 2);
 
-            StringBuilder sb = new StringBuilder();
-            foreach (var e in employees)
+            context.Projects.RemoveRange(project);
+            //context.SaveChanges();
+
+            var topTenProjects = context.Projects
+                .Take(10)
+                .Select(p => p.Name)
+                .ToArray();
+
+            return string.Join(Environment.NewLine, topTenProjects); 
+            }
+
+        //15
+        public static string RemoveTown(SoftUniContext context)
+            {
+            const string target = "Seattle";
+
+
+            var town = context.Towns
+                .FirstOrDefault(t => t.Name == target);
+
+
+            var addreses = context.Addresses
+                .Where(a => a.Town.Name == target)
+                .ToArray();
+            
+            var employeesToRemoveAddress = context.Employees
+                .Where(e => addreses.Contains(e.Address))
+                .ToArray();
+            
+
+            foreach (var a in employeesToRemoveAddress)
                 {
-                sb.AppendLine($"{e.FirstName} {e.LastName} - {e.JobTitle} - (${e.Salary:f2})");
+                a.AddressId = null;
                 }
+            context.Addresses.RemoveRange(addreses);
+            context.Towns.RemoveRange(town);
+            //context.SaveChanges();
 
-            return sb.ToString().Trim();
+
+            return $"{addreses.Count()} addresses in Seattle were deleted";
             }
         }
     }
