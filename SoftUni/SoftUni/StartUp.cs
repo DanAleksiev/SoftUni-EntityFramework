@@ -293,5 +293,23 @@ namespace SoftUni
             return sb.ToString().Trim();
             }
 
+        //13
+        public static string GetEmployeesByFirstNameStartingWithSa(SoftUniContext context)
+            {
+            decimal modifier = 1.12m;
+
+            var employees = context.Employees
+                .ToList();
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var e in employees)
+                {
+                e.Salary *= modifier;
+                sb.AppendLine($"{e.FirstName} {e.LastName} (${e.Salary:f2})");
+                }
+            //context.SaveChanges();
+
+            return sb.ToString().Trim();
+            }
         }
     }
