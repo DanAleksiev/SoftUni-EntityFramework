@@ -20,7 +20,7 @@ namespace SoftUni
 
             SoftUniContext context = new SoftUniContext();
 
-            string output = IncreaseSalaries(context);
+            string output = GetEmployeesByFirstNameStartingWithSa(context);
             Console.WriteLine(output);
             }
         //3
@@ -296,18 +296,51 @@ namespace SoftUni
         //13
         public static string GetEmployeesByFirstNameStartingWithSa(SoftUniContext context)
             {
-            decimal modifier = 1.12m;
-
             var employees = context.Employees
+                .Where(e => e.FirstName.StartsWith("Sa"))
+                .Select(e => new
+                    {
+                    e.FirstName, 
+                    e.LastName,
+                    e.JobTitle,
+                    e.Salary
+                    })
+                .OrderBy(e => e.FirstName)
+                .ThenBy(e => e.LastName)
                 .ToList();
 
             StringBuilder sb = new StringBuilder();
             foreach (var e in employees)
                 {
-                e.Salary *= modifier;
-                sb.AppendLine($"{e.FirstName} {e.LastName} (${e.Salary:f2})");
+                sb.AppendLine($"{e.FirstName} {e.LastName} - {e.JobTitle} - (${e.Salary:f2})");
                 }
-            //context.SaveChanges();
+
+            return sb.ToString().Trim();
+            }
+
+        //14
+        public static string DeleteProjectById(SoftUniContext context)
+            {
+            decimal modifier = 1.12m;
+
+            var employees = context.Employees
+                .Where(e => e.FirstName.StartsWith("Sa"))
+                .Select(e => new
+                    {
+                    e.FirstName,
+                    e.LastName,
+                    e.JobTitle,
+                    e.Salary
+                    })
+                .OrderBy(e => e.FirstName)
+                .ThenBy(e => e.LastName)
+                .ToList();
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var e in employees)
+                {
+                sb.AppendLine($"{e.FirstName} {e.LastName} - {e.JobTitle} - (${e.Salary:f2})");
+                }
 
             return sb.ToString().Trim();
             }
