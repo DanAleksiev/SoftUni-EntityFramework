@@ -12,3 +12,6 @@ C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P
 C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\obj\Debug\net6.0\P01_StudentSystem.Data.pdb
 C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\obj\Debug\net6.0\P01_StudentSystem.Data.genruntimeconfig.cache
 C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\obj\Debug\net6.0\ref\P01_StudentSystem.Data.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\bin\Debug\net6.0\P01_StudentSystem.Data.Models.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\bin\Debug\net6.0\P01_StudentSystem.Data.Models.pdb
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\obj\Debug\net6.0\P01_StudentSystem.Data.csproj.CopyComplete

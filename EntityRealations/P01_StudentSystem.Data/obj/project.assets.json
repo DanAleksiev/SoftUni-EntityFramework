@@ -779,6 +779,20 @@
             "rid": "win"
           }
         }
+      },
+      "P01_StudentSystem.Data.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.1",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.1"
+        },
+        "compile": {
+          "bin/placeholder/P01_StudentSystem.Data.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/P01_StudentSystem.Data.Models.dll": {}
+        }
       }
     }
   },
@@ -1998,6 +2012,11 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "P01_StudentSystem.Data.Models/1.0.0": {
+      "type": "project",
+      "path": "../P01_StudentSystem.Data.Models/P01_StudentSystem.Data.Models.csproj",
+      "msbuildProject": "../P01_StudentSystem.Data.Models/P01_StudentSystem.Data.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2005,7 +2024,8 @@
       "Microsoft.EntityFrameworkCore >= 6.0.1",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.1",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.1",
-      "Microsoft.EntityFrameworkCore.Tools >= 6.0.1"
+      "Microsoft.EntityFrameworkCore.Tools >= 6.0.1",
+      "P01_StudentSystem.Data.Models >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -2040,7 +2060,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\EntityRealations\\P01_StudentSystem.Data.Models\\P01_StudentSystem.Data.Models.csproj": {
+              "projectPath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\EntityRealations\\P01_StudentSystem.Data.Models\\P01_StudentSystem.Data.Models.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -489,7 +489,8 @@
       "P01_StudentSystem.Data/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "6.0.1",
-          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.1"
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.1",
+          "P01_StudentSystem.Data.Models": "1.0.0"
         },
         "runtime": {
           "P01_StudentSystem.Data.dll": {}

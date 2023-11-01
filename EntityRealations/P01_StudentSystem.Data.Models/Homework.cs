@@ -20,7 +20,7 @@ namespace P01_StudentSystem.Data.Models
         public int StudentId { get; set; }
 
         [ForeignKey(nameof(StudentId))]
-        public virtual Students Student { get; set; } = null!;
+        public virtual Student Student { get; set; } = null!;
 
         [Required]
         public int CourseId { get; set; }

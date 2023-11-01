@@ -114,7 +114,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\EntityRealations\\P01_StudentSystem.Data.Models\\P01_StudentSystem.Data.Models.csproj": {
+                "projectPath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\EntityRealations\\P01_StudentSystem.Data.Models\\P01_StudentSystem.Data.Models.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
