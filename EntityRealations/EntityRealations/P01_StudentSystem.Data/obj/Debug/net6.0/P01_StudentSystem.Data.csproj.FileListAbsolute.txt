@@ -1,0 +1,17 @@
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\bin\Debug\net6.0\P01_StudentSystem.Data.deps.json
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\bin\Debug\net6.0\P01_StudentSystem.Data.runtimeconfig.json
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\bin\Debug\net6.0\P01_StudentSystem.Data.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\bin\Debug\net6.0\P01_StudentSystem.Data.pdb
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\obj\Debug\net6.0\P01_StudentSystem.Data.csproj.AssemblyReference.cache
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\obj\Debug\net6.0\P01_StudentSystem.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\obj\Debug\net6.0\P01_StudentSystem.Data.AssemblyInfoInputs.cache
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\obj\Debug\net6.0\P01_StudentSystem.Data.AssemblyInfo.cs
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\obj\Debug\net6.0\P01_StudentSystem.Data.csproj.CoreCompileInputs.cache
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\obj\Debug\net6.0\P01_StudentSystem.Data.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\obj\Debug\net6.0\refint\P01_StudentSystem.Data.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\obj\Debug\net6.0\P01_StudentSystem.Data.pdb
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\obj\Debug\net6.0\P01_StudentSystem.Data.genruntimeconfig.cache
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\obj\Debug\net6.0\ref\P01_StudentSystem.Data.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\bin\Debug\net6.0\P01_StudentSystem.Data.Models.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\bin\Debug\net6.0\P01_StudentSystem.Data.Models.pdb
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem.Data\obj\Debug\net6.0\P01_StudentSystem.Data.csproj.CopyComplete
