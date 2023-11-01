@@ -14,11 +14,11 @@ namespace P01_StudentSystem.Data.Models
         public string Name { get; set; }
 
         [MaxLength(10)]
-        public string? Phonenumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
         [Required]
         public DateTime RegisteredOn { get; set; }
-        public DateTime? BirthDay { get; set; }
+        public DateTime? Birthday { get; set; }
 
         public ICollection<Homework> Homeorks { get; set; }
         public ICollection<StudentCourse> StudentsCourses { get; set; }
