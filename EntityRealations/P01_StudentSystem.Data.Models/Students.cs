@@ -9,10 +9,10 @@ namespace P01_StudentSystem.Data.Models
         [MaxLength(80)]
         [Unicode]
         [Required]
-        public string Name { get; set;}
+        public string Name { get; set; }
         [MaxLength(10)]
-        public string Phonenumber { get; set;}
+        public string Phonenumber { get; set; }
         [Required]
         public DateTime RegisteredOn { get; set; }
-    }
+        }
     }

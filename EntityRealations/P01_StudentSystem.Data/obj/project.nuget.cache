@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mRMAc1tHuiECYA3zSTWT3J+2gxIDFgBWqWKwc64bE+x4lkTd8YU+Q7w/4u7u2pHIlNF+R0lUUAZkJ6o1gkQohQ==",
+  "dgSpecHash": "+JPtu9r7gK1ZIAveGYTRZNeaets1piou118jrACc10TIaV/kooR/lFUIRjsa6UIkFXQmia/SkN2Cv5REgF5tlA==",
   "success": true,
   "projectFilePath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\EntityRealations\\P01_StudentSystem.Data\\P01_StudentSystem.Data.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,7 @@
     "C:\\Users\\toksi\\.nuget\\packages\\microsoft.entityframeworkcore.design\\6.0.1\\microsoft.entityframeworkcore.design.6.0.1.nupkg.sha512",
     "C:\\Users\\toksi\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\6.0.1\\microsoft.entityframeworkcore.relational.6.0.1.nupkg.sha512",
     "C:\\Users\\toksi\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\6.0.1\\microsoft.entityframeworkcore.sqlserver.6.0.1.nupkg.sha512",
+    "C:\\Users\\toksi\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\6.0.1\\microsoft.entityframeworkcore.tools.6.0.1.nupkg.sha512",
     "C:\\Users\\toksi\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0\\microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\toksi\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.0\\microsoft.extensions.caching.memory.6.0.0.nupkg.sha512",
     "C:\\Users\\toksi\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",

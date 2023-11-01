@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Microsoft.EntityFrameworkCore;
 
 namespace P01_StudentSystem.Data
     {
-    internal class StudentSystemContext
+    public class StudentSystemContext :DbContext
         {
+        private const string connectionString = @"Server=MSI\SQLEXPRESS;Database=SoftUni;Integrated Security=True;TrustServerCertificate=True";
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            {
+            optionsBuilder.UseSqlServer(connectionString);
+            }
         }
     }
