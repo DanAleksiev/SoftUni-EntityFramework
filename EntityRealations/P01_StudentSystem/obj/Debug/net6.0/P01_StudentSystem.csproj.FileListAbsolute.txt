@@ -56,3 +56,7 @@ C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P
 C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem\obj\Debug\net6.0\P01_StudentSystem.pdb
 C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem\obj\Debug\net6.0\P01_StudentSystem.genruntimeconfig.cache
 C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem\obj\Debug\net6.0\ref\P01_StudentSystem.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem\bin\Debug\net6.0\P01_StudentSystem.Data.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem\bin\Debug\net6.0\P01_StudentSystem.Data.Models.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem\bin\Debug\net6.0\P01_StudentSystem.Data.Models.pdb
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\EntityRealations\P01_StudentSystem\bin\Debug\net6.0\P01_StudentSystem.Data.pdb
