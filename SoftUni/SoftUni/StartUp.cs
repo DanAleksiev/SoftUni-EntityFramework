@@ -20,7 +20,7 @@ namespace SoftUni
 
             SoftUniContext context = new SoftUniContext();
 
-            string output = RemoveTown(context);
+            string output = GetEmployeesInPeriod(context);
             Console.WriteLine(output);
             }
         //3
@@ -122,25 +122,23 @@ namespace SoftUni
             {
             var employees = context.Employees
                 .Take(10)
-                .Include(e => e.EmployeesProjects)
-                .Include(e => e)
                 .Select(e => new
                     {
                     e.FirstName,
                     e.LastName,
-                    ManagerFirstName = e.Manager.FirstName,
-                    ManagerLastName = e.Manager.LastName,
+                    ManagerFirstName = e.Manager!.FirstName,
+                    ManagerLastName = e.Manager!.LastName,
                     Projects = e.EmployeesProjects
                         .Where(ep => ep.Project.StartDate.Year >= 2001 && ep.Project.StartDate.Year <= 2003)
                         .Select(ep => new
                             {
                             ProjectName = ep.Project.Name,
                             StartDate = ep.Project.StartDate.ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture),
-                            EndDate = ep.Project.EndDate.ToString != null
+                            EndDate = ep.Project.EndDate.HasValue
                                 ? ep.Project.EndDate.Value.ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture)
                                 : "not finished"
-                            })
-                    }).ToList();
+                            }).ToArray()
+                    }).ToArray();
 
             StringBuilder sb = new StringBuilder();
             foreach (var e in employees)
