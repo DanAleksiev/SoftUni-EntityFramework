@@ -1,28 +1,37 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace P01_StudentSystem.Data.Models
-    {
+{
     public class Course
-        {
-        public Course(ICollection<StudentCourse> studentsCourses, ICollection<Resource> resources, ICollection<Homework> homeworks)
-            {
-            StudentsCourses = studentsCourses;
-            Resources = resources;
-            Homeworks = homeworks;
-            }
-
+    {
+        [Key]
         public int CourseId { get; set; }
+
+        [Required]
+        [Unicode]
+        [MaxLength(80)]
         public string Name { get; set; }
-        public string Description { get; set; }
+
+        [Unicode]
+        public string? Description { get; set; }
+
+        [Required]
         public DateTime StartDate { get; set; }
+
+        [Required]
         public DateTime EndDate { get; set; }
+
+        [Required]
         public decimal Price { get; set; }
-        public ICollection<StudentCourse> StudentsCourses { get; set; }
-        public ICollection<Resource> Resources { get; set; }
-        public ICollection<Homework> Homeworks { get; set; }
-        }
+
+        public virtual ICollection<StudentCourse> StudentsCourses { get; set; } =
+            null!;
+
+        public virtual ICollection<Resource> Resources { get; set; } =
+            null!;
+
+        public virtual ICollection<Homework> Homeworks { get; set; } =
+            null!;
     }
+}

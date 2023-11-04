@@ -1,27 +1,30 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace P01_StudentSystem.Data.Models
-    {
+{
     public class Student
-        {
-        public Student(ICollection<Homework> homeworks, ICollection<StudentCourse> studentsCourses)
-            {
-            Homeworks = homeworks;
-            StudentsCourses = studentsCourses;
-            }
-
+    {
+        [Key]
         public int StudentId { get; set; }
 
+        [Required]
+        [Unicode]
+        [MaxLength(100)]
         public string Name { get; set; }
 
+        [StringLength(10)]
         public string? PhoneNumber { get; set; }
 
+        [Required]
         public DateTime RegisteredOn { get; set; }
+
         public DateTime? Birthday { get; set; }
 
-        public ICollection<Homework> Homeworks { get; set; }
-        public ICollection<StudentCourse> StudentsCourses { get; set; }
+        public virtual ICollection<StudentCourse> StudentsCourses { get; set; } =
+            null!;
+
+        public virtual ICollection<Homework> Homeworks { get; set; } =
+            null!;
     }
-    }
+}
