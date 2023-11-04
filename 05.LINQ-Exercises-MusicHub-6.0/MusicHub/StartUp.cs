@@ -35,9 +35,10 @@
                     a.ReleaseDate,
                     a.Price,
                     a.Songs,
-                    ProducerName = a.Producer.Name,         
+                    ProducerName = a.Producer.Name,
                     })
                 .Where(a => a.ProducerId == producerId)
+                .OrderBy(w => w.Name)
                 .ToList();
 
             StringBuilder sb = new StringBuilder();
@@ -52,16 +53,18 @@
 
                 if (album.Songs.Any())
                     {
-                    foreach (var songs in album.Songs)
+                    foreach (var songs in album.Songs
+                        .OrderByDescending(s=>s.Name)
+                        .ThenBy(w=>w.Writer.Name))
                         {
                         sb.AppendLine($"---#{count++}");
                         sb.AppendLine($"---SongName: {songs.Name}");
-                        sb.AppendLine($"---Price: {songs.Price}");
+                        sb.AppendLine($"---Price: {songs.Price:f2}");
                         sb.AppendLine($"---Writer: {songs.Writer.Name}");
                         }
                     }
 
-                sb.AppendLine($"-AlbumPrice: {album.Price}");
+                sb.AppendLine($"-AlbumPrice: {album.Price:f2}");
                 }
 
             return sb.ToString().Trim();
