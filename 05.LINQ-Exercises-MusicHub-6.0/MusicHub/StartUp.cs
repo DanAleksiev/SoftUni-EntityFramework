@@ -100,26 +100,18 @@
             foreach (var s in songs)
                 {
                 sb.AppendLine($"-Song #{counter++}");
-                sb.AppendLine($"--SongName: {s.Name}");
-                sb.AppendLine($"--Writer: {s.WriterName}");
+                sb.AppendLine($"---SongName: {s.Name}");
+                sb.AppendLine($"---Writer: {s.WriterName}");
                 if (s.Performer.Any())
                     {
-                    foreach (var p in s.Performer)
+                    foreach (var p in s.Performer.OrderBy(p => p))
                         {
-
-                        sb.AppendLine($"--Performer: {p}");
+                        sb.AppendLine($"---Performer: {p}");
                         }
                     }
-
-                sb.AppendLine($"--AlbumProducer: {s.Producer}");
-                sb.AppendLine($"--Duration: {s.Duration}");
-
-
+                sb.AppendLine($"---AlbumProducer: {s.Producer}");
+                sb.AppendLine($"---Duration: {s.Duration}");
                 }
-
-
-
-
             return sb.ToString().Trim();
             }
         }
