@@ -17,7 +17,7 @@
         public static void ResetDatabase(MusicHubDbContext context)
         {
             context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
+            context.Database.EnsureCreated(); 
 
             Console.WriteLine("MusicHub database created successfully.");
 
