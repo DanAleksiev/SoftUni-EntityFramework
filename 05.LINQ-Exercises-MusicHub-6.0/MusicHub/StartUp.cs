@@ -18,7 +18,7 @@
             //DbInitializer.ResetDatabase(context);
 
             //Test your solutions here
-            const int id = 4;
+            const int id = 120;
             Console.WriteLine(ExportSongsAboveDuration(context, id));
 
             }
@@ -67,7 +67,7 @@
                 sb.AppendLine($"-AlbumPrice: {album.Price:f2}");
                 }
 
-            return sb.ToString().Trim();
+            return sb.ToString().TrimEnd();
             }
 
         public static string ExportSongsAboveDuration(MusicHubDbContext context, int duration)
@@ -79,7 +79,7 @@
                 .Include(s => s.Album)
                     .ThenInclude(a => a.Producer)
                 .ToList()
-                .Where(s => s.Duration.TotalSeconds > 4)
+                .Where(s => s.Duration.TotalSeconds > duration)
                 .Select(s => new
                     {
                     s.Name,
