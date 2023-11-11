@@ -36,7 +36,7 @@ namespace ProjectSnake
                 {Direction.Left, 270},
             };
 
-        private readonly int rows = 10, cols = 30;
+        private readonly int rows = 15, cols = 15;
         private readonly Image[,] gridImage;
         private State gameState;
         private bool gameRunning;
@@ -134,6 +134,11 @@ namespace ProjectSnake
             {
             DrawGrid();
             DrawSnakeHead();
+            if(gameState.Score/ 10 == 0)
+                {
+                IncreaseSpeed();
+                }
+
             ScoreText.Text = $"Score: {gameState.Score}";
             }
 
@@ -148,6 +153,11 @@ namespace ProjectSnake
                     gridImage[r, c].RenderTransform = Transform.Identity;
                     }
                 }
+            }
+
+        private void IncreaseSpeed()
+            {
+            speed -= 10;
             }
 
         private void DrawSnakeHead()
