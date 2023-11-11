@@ -32,22 +32,22 @@
                 {
                 RedirectToAction("Error", "Home");
                 }
+            var newCategory = _mapper.Map<Category>(model);
 
-            var newCat = _mapper.Map<Category>(model);
-            _context.Categories.Add(newCat);
-
+            _context.Categories.Add(newCategory);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("All");
+
             }
 
         public async Task<IActionResult> All()
             {
-            var cat = await _context.Categories
+            var categories = await _context.Categories
                 .ProjectTo<CategoryAllViewModel>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
-            return View(cat);
+            return View(categories);
             }
         }
     }
