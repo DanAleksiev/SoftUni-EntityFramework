@@ -13,6 +13,8 @@ namespace ProjectSnake
         public int Score { get; private set; }
         public bool GameOver { get; private set; }
 
+
+        private readonly LinkedList<Direction> dirChanges = new LinkedList<Direction>();
         private readonly LinkedList<Position> snakePositions = new LinkedList<Position>();
         private readonly Random random = new Random();
 
@@ -95,9 +97,31 @@ namespace ProjectSnake
             snakePositions.RemoveLast();
             }
 
+        private Direction GetLastDirection()
+            {
+            if (dirChanges.Count == 0)
+                {
+                return Dir;
+                }
+            return dirChanges.Last.Value;
+            }
+
+        private bool CanChangeDirectio(Direction dir)
+            {
+            if (dirChanges.Count == 2)
+                {
+                return false;
+                }
+            Direction lastDir = GetLastDirection();
+            return dir != lastDir && dir != lastDir.Opposite();
+            }
+
         public void ChangeDirection(Direction direction)
             {
-            Dir = direction;
+            if (CanChangeDirectio(direction))
+                {
+                dirChanges.AddLast(direction);
+                }
             }
 
         private bool OutsideGrid(Position pos)
@@ -121,6 +145,11 @@ namespace ProjectSnake
 
         public void Move()
             {
+            if (dirChanges.Count > 0)
+                {
+                Dir = dirChanges.First.Value;
+                dirChanges.RemoveFirst();
+                }
             Position head = HeadPosition().Trnslate(Dir);
             GridValue hit = WillHit(head);
 
