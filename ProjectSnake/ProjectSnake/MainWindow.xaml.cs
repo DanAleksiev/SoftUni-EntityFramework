@@ -99,6 +99,12 @@ namespace ProjectSnake
                 {
                 await Task.Delay(speed);
                 gameState.Move();
+
+                if (gameState.Score % 10 == 0 && speed >50 && gameState.Score != 0)
+                    {
+                    IncreaseSpeed();
+                    }
+
                 Draw();
                 }
             }
@@ -134,10 +140,6 @@ namespace ProjectSnake
             {
             DrawGrid();
             DrawSnakeHead();
-            if(gameState.Score/ 10 == 0)
-                {
-                IncreaseSpeed();
-                }
 
             ScoreText.Text = $"Score: {gameState.Score}";
             }

@@ -55,9 +55,6 @@
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            TextWrapping="Wrap"/>
-
-
-
             </Border>
         </Grid>
     </Viewbox>
