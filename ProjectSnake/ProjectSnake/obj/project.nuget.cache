@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Iux6PX3KZCBImzSLywGa6DSNBQrbH2Q2JpKpjop83RWUUxXZa6ZUwr+fucrojh/5BO3NObamlmVLk5w8ufvAew==",
+  "dgSpecHash": "eqZ76dqk6a6SigHN0BMb//fY052NtpbQpdSMKjaA1fWmFJPUKFqN2CPsphjOdeyRkYFHyZO44S5zlyuwitrxQg==",
   "success": true,
   "projectFilePath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\ProjectSnake\\ProjectSnake\\ProjectSnake.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\toksi\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

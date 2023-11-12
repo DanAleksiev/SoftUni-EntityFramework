@@ -19,3 +19,6 @@ C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\ProjectSnake\Proje
 C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\ProjectSnake\ProjectSnake\obj\Debug\net6.0-windows\ProjectSnake.pdb
 C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\ProjectSnake\ProjectSnake\obj\Debug\net6.0-windows\ProjectSnake.genruntimeconfig.cache
 C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\ProjectSnake\ProjectSnake\obj\Debug\net6.0-windows\ref\ProjectSnake.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\ProjectSnake\ProjectSnake\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\ProjectSnake\ProjectSnake\obj\Debug\net6.0-windows\ProjectSnake.csproj.AssemblyReference.cache
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\ProjectSnake\ProjectSnake\obj\Debug\net6.0-windows\ProjectSnake.csproj.CopyComplete

@@ -1,4 +1,5 @@
-﻿using ProjectSnake.IO;
+﻿using Newtonsoft.Json;
+using ProjectSnake.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -259,7 +260,7 @@ namespace ProjectSnake
             ScoreText.Text = sb.ToString().Trim();
             }
 
-        private void SaveScore()
+        private async Task SaveScore()
             {
             int score = gameState.Score;
 
@@ -272,7 +273,7 @@ namespace ProjectSnake
                     }
                 }
 
-            writer.Write(score.ToString());
+            writer.Write(JsonConvert.SerializeObject(scores));
             }
 
         private async Task ShowGameOver()
