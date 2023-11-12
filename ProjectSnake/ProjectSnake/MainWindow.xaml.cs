@@ -193,6 +193,38 @@ namespace ProjectSnake
                 }
             }
 
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+            {
+            OverlayText.Text = "Settings";
+            Task.Delay(500);
+
+            SettingsButton.Visibility = Visibility.Collapsed;
+            ScoresButton.Visibility = Visibility.Collapsed;
+
+            BackButton.Visibility = Visibility.Visible;
+            }
+
+        private void ScoresButton_Click(object sender, RoutedEventArgs e)
+            {
+            OverlayText.Text = "HighScores";
+            Task.Delay(500);
+            SettingsButton.Visibility = Visibility.Collapsed;
+            ScoresButton.Visibility = Visibility.Collapsed;
+
+            BackButton.Visibility = Visibility.Visible;
+            }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+            {
+            OverlayText.Text = "Press any key to START!";
+            Task.Delay(500);
+
+            SettingsButton.Visibility = Visibility.Visible;
+            ScoresButton.Visibility = Visibility.Visible;
+
+            BackButton.Visibility = Visibility.Collapsed;
+            }
+
         private async Task ShowGameOver()
             {
             await DrawDeadSnake();
