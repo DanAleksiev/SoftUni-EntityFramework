@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectSnake.IO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,22 @@ namespace ProjectSnake
                 {Direction.Left, 270},
             };
 
+        private Dictionary<int, int> scores = new()
+            {
+                {1,0 },
+                {2,0 },
+                {3,0 },
+                {4,0 },
+                {5,0 },
+                {6,0 },
+                {7,0 },
+                {8,0 },
+                {9,0 },
+                {10,0 },
+            };
+
+        private FileWriter writer;
+        private FileReader reader;
         private readonly int rows = 15, cols = 15;
         private readonly Image[,] gridImage;
         private State gameState;
@@ -66,7 +83,7 @@ namespace ProjectSnake
                 e.Handled = true;
                 };
 
-            if(!gameRunning)
+            if (!gameRunning)
                 {
                 gameRunning = true;
                 await RunGame();
@@ -100,13 +117,15 @@ namespace ProjectSnake
                 await Task.Delay(speed);
                 gameState.Move();
 
-                if (gameState.Score % 10 == 0 && speed >50 && gameState.Score != 0)
+                if (gameState.Score % 10 == 0 && speed > 50 && gameState.Score != 0)
                     {
                     IncreaseSpeed();
                     }
 
                 Draw();
                 }
+
+            
             }
 
         private Image[,] SetupGrid()
@@ -115,7 +134,7 @@ namespace ProjectSnake
             GameGrid.Rows = rows;
             GameGrid.Columns = cols;
 
-            GameGrid.Width = GameGrid.Height * (cols/ (double)rows);
+            GameGrid.Width = GameGrid.Height * (cols / (double)rows);
 
             for (int r = 0; r < rows; r++)
                 {
@@ -178,7 +197,7 @@ namespace ProjectSnake
             for (int i = 0; i < positions.Count; i++)
                 {
                 Position pos = positions[i];
-                ImageSource source = (i==0)? Images.DeadHead: Images.DeadBody;
+                ImageSource source = (i == 0) ? Images.DeadHead : Images.DeadBody;
                 gridImage[pos.Row, pos.Col].Source = source;
                 await Task.Delay(50);
                 }
@@ -186,15 +205,79 @@ namespace ProjectSnake
 
         private async Task ShowCountDown()
             {
-            for(int i = 3;i >= 0; i--)
+            for (int i = 3; i >= 0; i--)
                 {
                 OverlayText.Text = i.ToString();
                 await Task.Delay(500);
                 }
             }
 
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+            {
+            OverlayText.Text = "Settings";
+            Task.Delay(500);
+
+            SettingsButton.Visibility = Visibility.Collapsed;
+            ScoresButton.Visibility = Visibility.Collapsed;
+
+            BackButton.Visibility = Visibility.Visible;
+            }
+
+        private void ScoresButton_Click(object sender, RoutedEventArgs e)
+            {
+            OverlayText.Text = "HighScores";
+            Task.Delay(500);
+            SettingsButton.Visibility = Visibility.Collapsed;
+            ScoresButton.Visibility = Visibility.Collapsed;
+
+            BackButton.Visibility = Visibility.Visible;
+
+            ShowScore();
+            }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+            {
+            OverlayText.Text = "Press any key to START!";
+            Task.Delay(500);
+
+            
+            SettingsButton.Visibility = Visibility.Visible;
+            ScoresButton.Visibility = Visibility.Visible;
+
+            ScoreText.Visibility = Visibility.Collapsed;
+            BackButton.Visibility = Visibility.Collapsed;
+            }
+
+        private void ShowScore()
+            {
+            StringBuilder sb = new StringBuilder();
+            foreach(var s in scores)
+                {
+                sb.AppendLine($"{s.Key}: {s.Value}");
+                }
+
+            ScoreText.Text = sb.ToString().Trim();
+            }
+
+        private void SaveScore()
+            {
+            int score = gameState.Score;
+
+            foreach (var s in scores)
+                {
+                if (score > s.Value)
+                    {
+                    scores[s.Key] = score;
+                    break;
+                    }
+                }
+
+            writer.Write(score.ToString());
+            }
+
         private async Task ShowGameOver()
             {
+            SaveScore();
             await DrawDeadSnake();
             await Task.Delay(1000);
             Overlay.Visibility = Visibility.Visible;
