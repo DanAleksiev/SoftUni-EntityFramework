@@ -105,15 +105,10 @@ namespace ProjectSnake
                 await Task.Delay(speed);
                 gameState.Move();
 
-                if (gameState.Score % 10 == 0 && speed > 50 && gameState.Score != 0)
-                    {
-                    IncreaseSpeed();
-                    }
-
                 Draw();
                 }
 
-            
+
             }
 
         private Image[,] SetupGrid()
@@ -148,6 +143,8 @@ namespace ProjectSnake
             DrawGrid();
             DrawSnakeHead();
 
+            IncreaseSpeed();
+
             ScoreText.Text = $"Score: {gameState.Score}";
             }
 
@@ -164,9 +161,24 @@ namespace ProjectSnake
                 }
             }
 
-        private void IncreaseSpeed()
+        private async void IncreaseSpeed()
             {
-            speed -= 10;
+            await Task.Delay(100);
+            switch (gameState.Score)
+                {
+                case 5:
+                speed = 175;
+                break;
+                case 10:
+                speed = 150;
+                break;
+                case 15:
+                speed = 125;
+                break;
+                case 20:
+                speed = 100;
+                break;
+                }
             }
 
         private void DrawSnakeHead()
@@ -230,7 +242,7 @@ namespace ProjectSnake
             OverlayText.Text = "Press any key to START!";
             Task.Delay(500);
 
-            
+
             SettingsButton.Visibility = Visibility.Visible;
             ScoresButton.Visibility = Visibility.Visible;
 
@@ -255,11 +267,11 @@ namespace ProjectSnake
         private async Task SaveScore()
             {
             string tempscores = reader.ReadFile();
-            var scores = JsonConvert.DeserializeObject<Dictionary<int,int>>(tempscores);
+            var scores = JsonConvert.DeserializeObject<Dictionary<int, int>>(tempscores);
 
             int currentScore = gameState.Score;
 
-            for ( int i = 1; i <= scores.Count; i++ ) 
+            for (int i = 1; i <= scores.Count; i++)
                 {
                 int highestNum = 0;
                 if (currentScore > scores[i])
