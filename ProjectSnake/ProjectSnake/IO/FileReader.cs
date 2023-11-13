@@ -11,11 +11,11 @@ namespace ProjectSnake.IO
         {
         string path = "../../../scores.txt";
 
-        public FileReader(string path)
+        public string ReadFile()
             {
             using StreamReader reader = new StreamReader(path);
                 {
-                reader.Read();
+                return reader.ReadLine();
                 }
             }
         }

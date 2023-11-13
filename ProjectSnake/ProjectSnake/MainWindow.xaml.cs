@@ -38,22 +38,9 @@ namespace ProjectSnake
                 {Direction.Left, 270},
             };
 
-        private Dictionary<int, int> scores = new()
-            {
-                {1,0 },
-                {2,0 },
-                {3,0 },
-                {4,0 },
-                {5,0 },
-                {6,0 },
-                {7,0 },
-                {8,0 },
-                {9,0 },
-                {10,0 },
-            };
 
-        private FileWriter writer;
-        private FileReader reader;
+        private FileWriter writer = new FileWriter();
+        private FileReader reader = new FileReader();
         private readonly int rows = 15, cols = 15;
         private readonly Image[,] gridImage;
         private State gameState;
@@ -221,6 +208,7 @@ namespace ProjectSnake
             SettingsButton.Visibility = Visibility.Collapsed;
             ScoresButton.Visibility = Visibility.Collapsed;
 
+
             BackButton.Visibility = Visibility.Visible;
             }
 
@@ -231,6 +219,7 @@ namespace ProjectSnake
             SettingsButton.Visibility = Visibility.Collapsed;
             ScoresButton.Visibility = Visibility.Collapsed;
 
+            ScoresTextTable.Visibility = Visibility.Visible;
             BackButton.Visibility = Visibility.Visible;
 
             ShowScore();
@@ -245,40 +234,49 @@ namespace ProjectSnake
             SettingsButton.Visibility = Visibility.Visible;
             ScoresButton.Visibility = Visibility.Visible;
 
-            ScoreText.Visibility = Visibility.Collapsed;
+            ScoresTextTable.Visibility = Visibility.Collapsed;
             BackButton.Visibility = Visibility.Collapsed;
             }
 
         private void ShowScore()
             {
             StringBuilder sb = new StringBuilder();
-            foreach(var s in scores)
+            string tempscores = reader.ReadFile();
+            var scores = JsonConvert.DeserializeObject<Dictionary<int, int>>(tempscores);
+
+            foreach (var s in scores)
                 {
                 sb.AppendLine($"{s.Key}: {s.Value}");
                 }
 
-            ScoreText.Text = sb.ToString().Trim();
+            ScoresTextTable.Text = sb.ToString().Trim();
             }
 
         private async Task SaveScore()
             {
-            int score = gameState.Score;
+            string tempscores = reader.ReadFile();
+            var scores = JsonConvert.DeserializeObject<Dictionary<int,int>>(tempscores);
 
-            foreach (var s in scores)
+            int currentScore = gameState.Score;
+
+            for ( int i = 1; i <= scores.Count; i++ ) 
                 {
-                if (score > s.Value)
+                int highestNum = 0;
+                if (currentScore > scores[i])
                     {
-                    scores[s.Key] = score;
-                    break;
+                    highestNum = scores[i];
+                    scores[i] = currentScore;
+                    currentScore = highestNum;
                     }
                 }
-
-            writer.Write(JsonConvert.SerializeObject(scores));
+            string result = JsonConvert.SerializeObject(scores);
+            await Console.Out.WriteLineAsync(result);
+            writer.WriteLine(result);
             }
 
         private async Task ShowGameOver()
             {
-            SaveScore();
+            await SaveScore();
             await DrawDeadSnake();
             await Task.Delay(1000);
             Overlay.Visibility = Visibility.Visible;
