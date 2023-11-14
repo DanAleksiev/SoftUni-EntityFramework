@@ -33,7 +33,13 @@ namespace ProductShop
             //Console.WriteLine(GetProductsInRange(context));
 
             // 06
-            Console.WriteLine(GetSoldProducts(context));
+            //Console.WriteLine(GetSoldProducts(context));
+
+            // 07
+            //Console.WriteLine(GetCategoriesByProductsCount(context));
+
+            //08
+            Console.WriteLine(GetUsersWithProducts(context));
 
 
 
@@ -106,15 +112,18 @@ namespace ProductShop
         public static string GetSoldProducts(ProductShopContext context)
             {
             var users = context.Users
+                .Where(u => u.ProductsSold.Any(p => p.BuyerId != null))
                 .Select(u => new
                     {
                     firstName = u.FirstName,
                     lastName = u.LastName,
-                    soldProducts = u.ProductsSold.Select(p => new
+                    soldProducts = u.ProductsSold
+                    .Where(p => p.BuyerId != null)
+                    .Select(p => new
                         {
                         name = p.Name,
                         price = p.Price,
-                        buyerFirstName = p.Buyer.FirstName,
+                        buyerFirstName = p.Buyer!.FirstName,
                         buyerLastName = p.Buyer.LastName
                         }).ToArray()
                     })
@@ -127,6 +136,89 @@ namespace ProductShop
             File.WriteAllText(@"../../../users-sold-products.json", json);
 
             return json.Trim();
+            }
+
+        public static string GetCategoriesByProductsCount(ProductShopContext context)
+            {
+            //var cat = context.Categories
+            //    .Select(c => new
+            //        {
+            //        category = c.Name,
+            //        productsCount = c.CategoriesProducts.Count(),
+            //        avaragePrice = $"{c.CategoriesProducts.Average(cp => cp.Product.Price):f2}",
+            //        totalRevenue = $"{c.CategoriesProducts.Sum(cp => cp.Product.Price):f2}",
+            //        })
+            //    .OrderByDescending(p => p.productsCount)
+            //    .ToArray();
+
+            //var json = JsonConvert.SerializeObject(cat, Formatting.Indented);
+
+            //File.WriteAllText(@"../../../categories-by-products.json", json);
+            //return json.Trim();
+
+
+            var categoriesByProductCount = context.Categories
+               .Select(c => new
+                   {
+                   category = c.Name,
+                   productsCount = c.CategoriesProducts.Count,
+                   averagePrice = c.CategoriesProducts
+                       .Average(cp => cp.Product.Price).ToString("f2"),
+                   totalRevenue = c.CategoriesProducts
+                       .Sum(cp => cp.Product.Price).ToString("f2")
+                   })
+               .OrderByDescending(x => x.productsCount)
+               .ToArray();
+
+            return JsonConvert.SerializeObject(categoriesByProductCount, Formatting.Indented);
+
+            }
+
+        public static string GetUsersWithProducts(ProductShopContext context)
+            {
+            var usersWithProduct = context.Users
+                .Where(u => u.ProductsSold.Any(p => p.BuyerId != null))
+                .Select(u => new
+                    {
+                    firstName = u.FirstName,
+                    lastName = u.LastName,
+                    age = u.Age,
+                    soldProducts = u.ProductsSold
+                        .Where(p => p.BuyerId != null)
+                        .Select(p => new
+                            {
+                            name = p.Name,
+                            price = p.Price
+                            })
+                        .ToArray()
+                    })
+                .OrderByDescending(u => u.soldProducts.Count())
+                .ToArray();
+
+
+            var output = new
+                {
+                usersCount = usersWithProduct.Count(),
+                users = usersWithProduct.Select(u => new
+                    {
+                    u.firstName,
+                    u.lastName,
+                    u.age,
+                    soldProducts = new
+                        {
+                        count = u.soldProducts.Count(),
+                        products = u.soldProducts
+                        }
+                    })
+                };
+
+            string jsonOutput = JsonConvert.SerializeObject(output, new JsonSerializerSettings
+                {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore
+                });
+
+            return jsonOutput;
             }
         }
     }
