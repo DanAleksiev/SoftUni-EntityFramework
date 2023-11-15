@@ -10,6 +10,6 @@
         public Car Car { get; set; } = null!;    
 
         public int CustomerId { get; set; }
-        public Customer Customer { get; set; } = null!; 
+        public Sale Customer { get; set; } = null!; 
     }
 }
