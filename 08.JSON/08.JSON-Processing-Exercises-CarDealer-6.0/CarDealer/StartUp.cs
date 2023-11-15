@@ -45,8 +45,11 @@ namespace CarDealer
             //Console.WriteLine(GetCarsFromMakeToyota(context));
 
             // 16
-            Console.WriteLine(GetLocalSuppliers(context));
-            }
+            //Console.WriteLine(GetLocalSuppliers(context));
+
+            // 17
+            Console.WriteLine(GetCarsWithTheirListOfParts(context));
+        }
         public static IMapper CreateMapper()
             {
             var configuration = new MapperConfiguration(config =>
@@ -166,7 +169,7 @@ namespace CarDealer
 
             var json = JsonConvert.SerializeObject(result, Formatting.Indented);
 
-            File.WriteAllText(@"../../../ordered-customers.json", json);
+            File.WriteAllText(@"../../../Results/ordered-customers.json", json);
 
             return json.Trim();
             }
@@ -187,7 +190,7 @@ namespace CarDealer
 
             var json = JsonConvert.SerializeObject(result, Formatting.Indented);
 
-            File.WriteAllText(@"../../../toyota-cars.json", json);
+            File.WriteAllText(@"../../../Results/toyota-cars.json", json);
 
             return json.Trim();
             }
@@ -205,7 +208,30 @@ namespace CarDealer
 
             var json = JsonConvert.SerializeObject(result, Formatting.Indented);
 
-            File.WriteAllText(@"../../../toyota-cars.json", json);
+            File.WriteAllText(@"../../../Results/local-suppliers.json", json);
+
+            return json.Trim();
+            }
+
+        public static string GetCarsWithTheirListOfParts(CarDealerContext context)
+            {
+            var result = context.Cars
+              .Select(x => new
+                  {
+                  x.Make,
+                  x.Model,
+                  x.TraveledDistance,
+                  parts = x.PartsCars.Select(y => new
+                      {
+                      Name = y.Part.Name,
+                      Price = y.Part.Price.ToString("f2"),
+                      }).ToArray(),
+                  })
+              .ToArray();
+
+            var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+            File.WriteAllText(@"../../../Results/cars-and-parts.json", json);
 
             return json.Trim();
             }
