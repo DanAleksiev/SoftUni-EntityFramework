@@ -5,12 +5,13 @@ namespace CarDealer.DTOs
     public class CustomersDTO
         {
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         [JsonProperty("birthDate")]
         public DateTime BirthDate { get; set; }
 
+
         [JsonProperty("isYoungDriver")]
-        public bool isYoungDriver { get; set; }
+        public bool IsYoungDriver { get; set; }
         }
     }

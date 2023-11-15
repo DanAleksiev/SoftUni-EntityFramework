@@ -11,6 +11,6 @@ namespace CarDealer.DTOs
         public int CustomerId { get; set; }
 
         [JsonProperty("discount")]
-        public int Discount { get; set; }
+        public decimal Discount { get; set; }
         }
     }

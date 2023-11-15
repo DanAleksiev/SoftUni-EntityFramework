@@ -4,21 +4,21 @@ namespace CarDealer.DTOs
     {
     public class CarsDTO
         {
-        public CarsDTO(IEnumerable<int> partsID)
+        public CarsDTO()
             {
-            this.PartsId = new List<int>();
+            this.PartsIds = new HashSet<int>();
             }
 
         [JsonProperty("make")]
-        public string Make { get; set; }
+        public string Make { get; set; } = null!;
 
         [JsonProperty("model")]
-        public string Model { get; set; }
+        public string Model { get; set; } = null!;
 
         [JsonProperty("traveledDistance")]
-        public int TravelDistance { get; set; }
+        public int TraveledDistance { get; set; }
 
         [JsonProperty("partsId")]
-        public IEnumerable<int> PartsId { get; set; }
+        public virtual ICollection<int> PartsIds { get; set; }
         }
     }

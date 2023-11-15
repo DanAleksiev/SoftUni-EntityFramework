@@ -14,83 +14,98 @@ namespace CarDealer
         public static void Main()
             {
             CarDealerContext context = new CarDealerContext();
+            string salesJson = File.ReadAllText("../../../Datasets/sales.json");
             string carsJson = File.ReadAllText("../../../Datasets/cars.json");
             string partsJson = File.ReadAllText("../../../Datasets/parts.json");
             string customersJson = File.ReadAllText("../../../Datasets/customers.json");
             string suppliersJson = File.ReadAllText("../../../Datasets/suppliers.json");
 
-            // 09
+            //context.Database.EnsureDeleted();
+            //context.Database.EnsureCreated();
+
+            //// 09
             //Console.WriteLine(ImportSuppliers(context, suppliersJson));
 
-            // 10
+            //// 10
             //Console.WriteLine(ImportParts(context, partsJson));
 
-            // 11
+            //// 11
             //Console.WriteLine(ImportCars(context, carsJson));
 
-            // 12
+            //// 12
             //Console.WriteLine(ImportCustomers(context, customersJson));
 
-            // 13
-            Console.WriteLine(ImportSales(context, customersJson));
+            ////13
+            //Console.WriteLine(ImportSales(context, salesJson));
+
+            //14
+            Console.WriteLine(GetOrderedCustomers(context));
+
+
 
             }
         public static IMapper CreateMapper()
             {
-            MapperConfiguration configuration = new MapperConfiguration(config =>
+            var configuration = new MapperConfiguration(config =>
             {
                 config.AddProfile<CarDealerProfile>();
             });
+
+
 
             IMapper mapper = configuration.CreateMapper();
 
             return mapper;
             }
 
+
         public static string ImportSuppliers(CarDealerContext context, string inputJson)
             {
             var mapper = CreateMapper();
-            SupplierDTO[] suppliersDtos = JsonConvert.DeserializeObject<SupplierDTO[]>(inputJson);
-            Supplier[] suppliers = mapper.Map<Supplier[]>(suppliersDtos);
 
-            context.Suppliers.AddRangeAsync(suppliers);
+            SupplierDTO[] sDtos = JsonConvert.DeserializeObject<SupplierDTO[]>(inputJson);
+
+            Supplier[] suppliers = mapper.Map<Supplier[]>(sDtos);
+
+            context.Suppliers.AddRange(suppliers);
             context.SaveChanges();
 
-            return $"Successfully imported {suppliers.Length}.";
+            return $"Successfully imported {suppliers.Count()}.";
+
             }
 
         public static string ImportParts(CarDealerContext context, string inputJson)
             {
             var mapper = CreateMapper();
-            PartsDTO[] partsDtos = JsonConvert.DeserializeObject<PartsDTO[]>(inputJson);
-            List<Part> parts = new List<Part>();
 
-            foreach (var part in partsDtos)
-                {
-                if (context.Suppliers.Any(s => s.Id == part.SupplierId))
-                    {
-                    parts.Add(mapper.Map<Part>(part));
-                    }
-                }
+            PartsDTO[] partsDTOs = JsonConvert.DeserializeObject<PartsDTO[]>(inputJson);
+            Part[] parts = mapper.Map<Part[]>(partsDTOs);
 
-            context.Parts.AddRangeAsync(parts);
+            int[] supplierIds = context.Suppliers
+                .Select(x => x.Id)
+                .ToArray();
+
+            Part[] partsWithvalidSuppliers = parts
+                .Where(p => supplierIds.Contains(p.SupplierId)).ToArray();
+
+            context.Parts.AddRange(partsWithvalidSuppliers);
             context.SaveChanges();
 
-            return $"Successfully imported {parts.Count}.";
+            return $"Successfully imported {partsWithvalidSuppliers.Count()}.";
             }
 
         public static string ImportCars(CarDealerContext context, string inputJson)
             {
             IMapper mapper = CreateMapper();
-            CarsDTO[] importCarDtos = JsonConvert.DeserializeObject<CarsDTO[]>(inputJson);
 
+            CarsDTO[] importCarDtos = JsonConvert.DeserializeObject<CarsDTO[]>(inputJson);
             ICollection<Car> carsToAdd = new HashSet<Car>();
 
             foreach (var carDto in importCarDtos)
                 {
                 Car currentCar = mapper.Map<Car>(carDto);
 
-                foreach (var id in carDto.PartsId)
+                foreach (var id in carDto.PartsIds)
                     {
                     if (context.Parts.Any(p => p.Id == id))
                         {
@@ -113,16 +128,15 @@ namespace CarDealer
         public static string ImportCustomers(CarDealerContext context, string inputJson)
             {
             var mapper = CreateMapper();
-            CarsDTO[] customerDtos = JsonConvert.DeserializeObject<CarsDTO[]>(inputJson);
-            Customer[] customers = JsonConvert.DeserializeObject<Customer[]>(inputJson);
+            CustomersDTO[] customersCarDtos = JsonConvert.DeserializeObject<CustomersDTO[]>(inputJson);
+            Customer[] customers = mapper.Map<Customer[]>(customersCarDtos);
 
             context.Customers.AddRange(customers);
             context.SaveChanges();
 
-            return $"Successfully imported {customers.Length}.";
+            return $"Successfully imported {customers.Count()}.";
             }
 
-        //13.Import Sales
         public static string ImportSales(CarDealerContext context, string inputJson)
             {
             var mapper = CreateMapper();
@@ -133,6 +147,25 @@ namespace CarDealer
             context.SaveChanges();
 
             return $"Successfully imported {sales.Length}.";
+            }
+
+        public static string GetOrderedCustomers(CarDealerContext context)
+            {
+            var result = context.Customers
+                .OrderBy(x => x.BirthDate)
+                .ThenBy(x => x.IsYoungDriver)
+                .Select(x => new
+                    {
+                    Name = x.Name,
+                    BirthDate = x.BirthDate.ToString("dd/MM/yyyy"),
+                    IsYoungDriver = x.IsYoungDriver
+                    });
+
+            var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+            File.WriteAllText(@"../../../ordered-customers.json", json);
+
+            return json.Trim();
             }
         }
     }
