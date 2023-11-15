@@ -136,10 +136,13 @@ namespace CarDealer
         public static string ImportSales(CarDealerContext context, string inputJson)
             {
             var mapper = CreateMapper();
-            SalesDTO[] salesCarDtos = JsonConvert.DeserializeObject<SalesDTO[]>(inputJson);
-            Sale[] sales = mapper.Map<Sale[]>(salesCarDtos);
 
-            context.Customers.AddRange(sales);
+            SalesDTO[] salesDtos = JsonConvert.DeserializeObject<SalesDTO[]>(inputJson);
+
+            Sale[] sales = JsonConvert.DeserializeObject<Sale[]>(inputJson);
+
+
+            context.Sales.AddRange(sales);
             context.SaveChanges();
 
             return $"Successfully imported {sales.Count()}.";
