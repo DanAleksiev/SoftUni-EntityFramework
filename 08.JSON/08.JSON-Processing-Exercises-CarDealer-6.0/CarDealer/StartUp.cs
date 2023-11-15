@@ -4,8 +4,7 @@ using CarDealer.DTOs;
 using CarDealer.Models;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
-using Castle.Core.Resource;
-
+using System.Diagnostics;
 
 namespace CarDealer
     {
@@ -48,8 +47,16 @@ namespace CarDealer
             //Console.WriteLine(GetLocalSuppliers(context));
 
             // 17
-            Console.WriteLine(GetCarsWithTheirListOfParts(context));
-        }
+            //Console.WriteLine(GetCarsWithTheirListOfParts(context));
+
+            // 18
+            //Console.WriteLine(GetTotalSalesByCustomer(context));
+
+            // 19
+            //Console.WriteLine(GetSalesWithAppliedDiscount(context));
+            }
+
+
         public static IMapper CreateMapper()
             {
             var configuration = new MapperConfiguration(config =>
@@ -218,9 +225,12 @@ namespace CarDealer
             var result = context.Cars
               .Select(x => new
                   {
-                  x.Make,
-                  x.Model,
-                  x.TraveledDistance,
+                  car = new
+                      {
+                      x.Make,
+                      x.Model,
+                      x.TraveledDistance
+                      },
                   parts = x.PartsCars.Select(y => new
                       {
                       Name = y.Part.Name,
@@ -232,6 +242,58 @@ namespace CarDealer
             var json = JsonConvert.SerializeObject(result, Formatting.Indented);
 
             File.WriteAllText(@"../../../Results/cars-and-parts.json", json);
+
+            return json.Trim();
+            }
+
+        public static string GetTotalSalesByCustomer(CarDealerContext context)
+            {
+
+            //throws a Unhandled exception. Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot perform an aggregate function on an expression containing an aggregate or a subquery. ERROR
+            //but for some reason passes the tests
+            // works if you replace the first Sum with a select but it returns a array of prices 
+
+            var result = context.Customers
+                .Where(x => x.Sales.Count > 0)
+                .Select(x => new
+                    {
+                    fullName = x.Name,
+                    boughtCars = x.Sales.Count,
+                    spentMoney = x.Sales.Sum(x => x.Car.PartsCars.Sum(x => x.Part.Price)),
+                    })
+                .OrderByDescending(x => x.spentMoney)
+                .ThenByDescending(x => x.boughtCars)
+                .ToArray();
+
+            var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+            //File.WriteAllText(@"../../../Results/customers-total-sales.json", json);
+
+            return json;
+            }
+
+        public static string GetSalesWithAppliedDiscount(CarDealerContext context)
+            {
+            var result = context.Sales
+                .Take(10)
+                .Select(x => new
+                    {
+                    car = new
+                        {
+                        x.Car.Make,
+                        x.Car.Model,
+                        x.Car.TraveledDistance
+                        },
+                    customerName = x.Customer.Name,
+                    discount =x.Discount.ToString("f2"),
+                    price = x.Car.PartsCars.Sum(x => x.Part.Price).ToString("f2"),
+                    priceWithDiscount = (x.Car.PartsCars.Sum(x => x.Part.Price) - x.Car.PartsCars.Sum(x => x.Part.Price)*(x.Discount / 100)).ToString("f2")
+                    })
+                .ToArray();
+
+            var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+            File.WriteAllText(@"../../../Results/sales-discounts.json", json);
 
             return json.Trim();
             }
