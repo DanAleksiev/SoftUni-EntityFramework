@@ -23,10 +23,10 @@ namespace CarDealer
             //context.Database.EnsureCreated();
 
             //// 09
-            Console.WriteLine(ImportSuppliers(context, suppliersJson));
+            //Console.WriteLine(ImportSuppliers(context, suppliersJson));
 
             //// 10
-            //Console.WriteLine(ImportParts(context, partsJson));
+            Console.WriteLine(ImportParts(context, partsJson));
 
             //// 11
             //Console.WriteLine(ImportCars(context, carsJson));
@@ -88,15 +88,32 @@ namespace CarDealer
         public static string ImportParts(CarDealerContext context, string inputXml)
             {
             XmlFormating formating = new XmlFormating();
-            ImportSuppliersDTO[] dto = formating.Deserialize<ImportSuppliersDTO[]>(inputXml, "Parts");
+            ImportPartsDTO[] dto = formating.Deserialize<ImportPartsDTO[]>(inputXml, "Parts");
 
             var map = CreateMapper();
-            Supplier[] output = map.Map<Supplier[]>(dto);
+            Part[] output = map.Map<Part[]>(dto);
 
-            context.Suppliers.AddRange(output);
+
+            List<Part> parts = new List<Part>();
+            var suppliers = context.Suppliers;
+            foreach (var part in output)
+                {
+                foreach (var supplier in suppliers)
+                    {
+                    if (part.SupplierId == supplier.Id)
+                        {
+                        part.Supplier = supplier;
+                        parts.Add(part);
+                        }
+                    }
+                }
+
+            context.Parts.AddRange(parts);
             context.SaveChanges();
 
-            return $"Successfully imported {output.Length}";
+            return $"Successfully imported {parts.Count}";
             }
+
+
         }
     }

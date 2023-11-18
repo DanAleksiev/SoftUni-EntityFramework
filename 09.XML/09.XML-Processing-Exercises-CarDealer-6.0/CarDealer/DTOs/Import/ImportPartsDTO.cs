@@ -6,7 +6,7 @@ namespace CarDealer.DTOs.Import
     public class ImportPartsDTO
         {
         [XmlElement("name")]
-        public string? Name { get; set; }
+        public string Name { get; set; } = null!;
 
         [XmlElement("price")]
         public decimal Price { get; set; }
