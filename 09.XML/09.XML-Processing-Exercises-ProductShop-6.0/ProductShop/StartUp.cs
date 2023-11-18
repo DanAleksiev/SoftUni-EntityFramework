@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using ProductShop.Data;
+using ProductShop.DTOs.Export;
 using ProductShop.DTOs.Import;
 using ProductShop.Models;
 using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -19,6 +22,7 @@ namespace ProductShop
             string productsJson = File.ReadAllText("../../../Datasets/products.xml");
             string userxml = File.ReadAllText("../../../Datasets/users.xml");
 
+
             //1
             //Console.WriteLine(ImportUsers(context, userxml));
 
@@ -29,9 +33,12 @@ namespace ProductShop
             //Console.WriteLine(ImportCategories(context, categoriesJson));
 
             //4
-            Console.WriteLine(ImportCategoryProducts(context, categoriesProductsJson));
+            //Console.WriteLine(ImportCategoryProducts(context, categoriesProductsJson));
 
-            }
+            //5
+            Console.WriteLine(GetProductsInRange(context));
+
+        }
         public static IMapper CreateMapper()
             {
             var configuration = new MapperConfiguration(config =>
@@ -50,7 +57,6 @@ namespace ProductShop
             {
             // 1. Create xml serializer
             var result = new XmlSerializer(typeof(ImportUsersDTO[]), new XmlRootAttribute("Users"));
-
 
             // 2.read the xml
             using var reader = new StringReader(inputXml);
@@ -113,6 +119,25 @@ namespace ProductShop
             context.SaveChanges();
 
             return $"Successfully imported {output.Length}";
+            }
+
+        public static string GetProductsInRange(ProductShopContext context)
+            {
+            var result = context.Products
+                .Where(x => x.Price >= 500 && x.Price <= 1000)
+                .OrderBy(x => x.Price)
+                .Select(x => new ExportProductsDTO()
+                    {
+                    Name = x.Name,
+                    Price = x.Price,
+                    Buyer = $"{x.Buyer.FirstName} {x.Buyer.LastName}"
+                    })
+                .Take(10)
+                .ToArray();
+
+            var xml = new XmlFormating();
+
+            return xml.Serialize<ExportProductsDTO[]>(result, "Products");
             }
         }
 }
