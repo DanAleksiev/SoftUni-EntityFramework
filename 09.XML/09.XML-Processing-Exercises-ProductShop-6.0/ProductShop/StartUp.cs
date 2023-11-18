@@ -1,4 +1,6 @@
-﻿using ProductShop.Data;
+﻿using AutoMapper;
+using ProductShop.Data;
+using ProductShop.DTOs.Import;
 using ProductShop.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Xml.Linq;
@@ -15,30 +17,42 @@ namespace ProductShop
             string categoriesJson = File.ReadAllText("../../../Datasets/categories.xml");
             string categoriesProductsJson = File.ReadAllText("../../../Datasets/categories-products.xml");
             string productsJson = File.ReadAllText("../../../Datasets/products.xml");
-            string userJson = File.ReadAllText("../../../Datasets/users.xml");
+            string userxml = File.ReadAllText("../../../Datasets/users.xml");
+
+            // 01
+            Console.WriteLine(ImportUsers(context, userxml));
+            }
+        public static IMapper CreateMapper()
+            {
+            var configuration = new MapperConfiguration(config =>
+            {
+                config.AddProfile<ProductShopProfile>();
+            });
 
 
-            Console.WriteLine(ImportUsers(context, userJson));
+
+            IMapper mapper = configuration.CreateMapper();
+
+            return mapper;
             }
 
         public static string ImportUsers(ProductShopContext context, string inputXml)
             {
-            //var doc = new XmlSerializer(typeof(User));
-            //string des = doc.Deserialize(inputXml).ToString();
+            // 1. Create xml serializer
+            var result = new XmlSerializer(typeof(ImportUsersDTO[]), new XmlRootAttribute("Users"));
 
-            var doc = new XDocument();
-            doc = XDocument.Parse(inputXml);
 
-            List<User> users = new List<User>();
+            // 2.
+            using var reader = new StringReader(inputXml);
+            ImportUsersDTO[] importUsersDTO = (ImportUsersDTO[])result.Deserialize(reader);
 
-            foreach (var d in doc.Root.Elements())
-            {
-                User user = new User();
-                users.Add(user);
-                
-                }
-            context.Users.AddRange();
-            //XmlSerializer xmlSerializer = new XmlSerializer();
+            // 3.
+            var map =  CreateMapper();
+            User[] users = map.Map<User[]>(importUsersDTO);
+
+            context.Users.AddRange(users);
+            context.SaveChanges();
+
             return $"Successfully imported {users.Length}";
             }
         }
