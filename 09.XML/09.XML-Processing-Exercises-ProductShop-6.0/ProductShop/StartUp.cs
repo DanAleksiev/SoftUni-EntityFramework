@@ -26,7 +26,10 @@ namespace ProductShop
             //Console.WriteLine(ImportProducts(context, productsJson));
 
             //3
-            Console.WriteLine(ImportCategories(context, categoriesJson));
+            //Console.WriteLine(ImportCategories(context, categoriesJson));
+
+            //4
+            Console.WriteLine(ImportCategoryProducts(context, categoriesProductsJson));
 
             }
         public static IMapper CreateMapper()
@@ -94,6 +97,22 @@ namespace ProductShop
             context.SaveChanges();
 
             return $"Successfully imported {cat.Length}";
+            }
+
+        public static string ImportCategoryProducts(ProductShopContext context, string inputXml)
+            {
+            var result = new XmlSerializer(typeof(ImportCategoryProductDTO[]), new XmlRootAttribute("CategoryProducts"));
+
+            using var reader = new StringReader(inputXml);
+            ImportCategoryProductDTO[] importDTO = (ImportCategoryProductDTO[])result.Deserialize(reader);
+
+            var map = CreateMapper();
+            CategoryProduct[] output = map.Map<CategoryProduct[]>(importDTO);
+
+            context.CategoryProducts.AddRange(output);
+            context.SaveChanges();
+
+            return $"Successfully imported {output.Length}";
             }
         }
 }
