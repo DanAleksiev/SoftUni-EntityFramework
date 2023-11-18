@@ -10,9 +10,9 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace ProductShop
-{
-    public class StartUp
     {
+    public class StartUp
+        {
         public static void Main()
             {
             ProductShopContext context = new ProductShopContext();
@@ -36,9 +36,12 @@ namespace ProductShop
             //Console.WriteLine(ImportCategoryProducts(context, categoriesProductsJson));
 
             //5
-            Console.WriteLine(GetProductsInRange(context));
+            //Console.WriteLine(GetProductsInRange(context));
 
-        }
+            //5
+            Console.WriteLine(GetSoldProducts(context));
+
+            }
         public static IMapper CreateMapper()
             {
             var configuration = new MapperConfiguration(config =>
@@ -63,7 +66,7 @@ namespace ProductShop
             ImportUsersDTO[] importUsersDTO = (ImportUsersDTO[])result.Deserialize(reader);
 
             // 3.map the object
-            var map =  CreateMapper();
+            var map = CreateMapper();
             User[] users = map.Map<User[]>(importUsersDTO);
 
             // 4. commit to db
@@ -124,6 +127,7 @@ namespace ProductShop
         public static string GetProductsInRange(ProductShopContext context)
             {
             var result = context.Products
+                .Take(10)
                 .Where(x => x.Price >= 500 && x.Price <= 1000)
                 .OrderBy(x => x.Price)
                 .Select(x => new ExportProductsDTO()
@@ -132,12 +136,36 @@ namespace ProductShop
                     Price = x.Price,
                     Buyer = $"{x.Buyer.FirstName} {x.Buyer.LastName}"
                     })
-                .Take(10)
                 .ToArray();
 
             var xml = new XmlFormating();
 
             return xml.Serialize<ExportProductsDTO[]>(result, "Products");
             }
+        public static string GetSoldProducts(ProductShopContext context)
+            {
+            var result = context.Users
+                .Where(x => x.ProductsSold.Count > 1)
+                .Select(x => new ExportSoldProductsDTO()
+                    {
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    SoldProducts = x.ProductsSold
+                        .Select(x => new ProductsDTO()
+                            {
+                            Name = x.Name,
+                            Price = x.Price,
+                            })
+                        .ToArray()
+                    })
+                .OrderBy(x => x.LastName)
+                .ThenBy(x => x.FirstName)
+                .Take(5)
+                .ToArray();
+
+            var xml = new XmlFormating();
+
+            return xml.Serialize<ExportSoldProductsDTO[]>(result, "Users");
+            }
         }
-}
+    }
