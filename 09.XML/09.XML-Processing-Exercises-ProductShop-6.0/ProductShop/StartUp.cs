@@ -42,9 +42,13 @@ namespace ProductShop
             //Console.WriteLine(GetSoldProducts(context));
 
             //7
-            Console.WriteLine(GetCategoriesByProductsCount(context));
+            //Console.WriteLine(GetCategoriesByProductsCount(context));
 
-        }
+            //8
+            Console.WriteLine(GetUsersWithProducts(context));
+
+            }
+
         public static IMapper CreateMapper()
             {
             var configuration = new MapperConfiguration(config =>
@@ -52,12 +56,11 @@ namespace ProductShop
                 config.AddProfile<ProductShopProfile>();
             });
 
-
-
             IMapper mapper = configuration.CreateMapper();
 
             return mapper;
             }
+
 
         public static string ImportUsers(ProductShopContext context, string inputXml)
             {
@@ -174,13 +177,13 @@ namespace ProductShop
         public static string GetCategoriesByProductsCount(ProductShopContext context)
             {
             var result = context.Categories
-                .Select(x => new ExportCategoryProductDTO() 
-                {
+                .Select(x => new ExportCategoryProductDTO()
+                    {
                     Name = x.Name,
                     Count = x.CategoryProducts.Count,
                     AvaragePrice = x.CategoryProducts.Average(p => p.Product.Price),
                     TotalRevenue = x.CategoryProducts.Sum(p => p.Product.Price)
-                })
+                    })
                 .OrderByDescending(x => x.Count)
                 .ThenBy(x => x.TotalRevenue)
                 .ToArray();
@@ -189,6 +192,43 @@ namespace ProductShop
 
             return xml.Serialize<ExportCategoryProductDTO[]>(result, "Categories");
 
+            }
+
+        public static string GetUsersWithProducts(ProductShopContext context)
+            {
+            //give up and copy it :(
+            var usersInfo = context
+                    .Users
+                    .Where(u => u.ProductsSold.Any())
+                    .OrderByDescending(u => u.ProductsSold.Count)
+                    .Select(u => new UsersArr()
+                        {
+                        FirstName = u.FirstName,
+                        LastName = u.LastName,
+                        Age = u.Age,
+                        ProductsSoldSection = new ProductsSoldDTO()
+                            {
+                            Count = u.ProductsSold.Count,
+                            Products = u.ProductsSold.Select(p => new ProductsArray()
+                                {
+                                Name = p.Name,
+                                Price = p.Price
+                                })
+                            .OrderByDescending(p => p.Price)
+                            .ToArray()
+                            }
+                        })
+                    .Take(10)
+                    .ToArray();
+
+            ExportProductsSoldByUsersDTO exportUserCountDto = new ExportProductsSoldByUsersDTO()
+                {
+                Count = context.Users.Count(u => u.ProductsSold.Any()),
+                AllUsers = usersInfo
+                };
+
+            var xmlParser = new XmlFormating();
+            return xmlParser.Serialize<ExportProductsSoldByUsersDTO>(exportUserCountDto, "Users");
             }
         }
     }

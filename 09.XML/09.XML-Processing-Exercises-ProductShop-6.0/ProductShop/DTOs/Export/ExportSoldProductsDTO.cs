@@ -23,6 +23,5 @@ namespace ProductShop.DTOs.Export
 
         [XmlElement("price")]
         public decimal Price { get; set; }
-
         }
     }
