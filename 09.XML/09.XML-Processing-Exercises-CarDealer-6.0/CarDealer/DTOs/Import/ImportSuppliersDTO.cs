@@ -6,7 +6,7 @@ namespace CarDealer.DTOs.Import
     public class ImportSuppliersDTO
         {
         [XmlElement("name")]
-        public string? Name { get; set; }
+        public string? Name { get; set; } = null!;
 
         [XmlElement("isImported")]
         public bool IsImported { get; set;}
