@@ -19,8 +19,12 @@ namespace ProductShop
             string productsJson = File.ReadAllText("../../../Datasets/products.xml");
             string userxml = File.ReadAllText("../../../Datasets/users.xml");
 
-            // 01
-            Console.WriteLine(ImportUsers(context, userxml));
+            //1
+            //Console.WriteLine(ImportUsers(context, userxml));
+
+            //2
+            Console.WriteLine(ImportProducts(context, productsJson));
+
             }
         public static IMapper CreateMapper()
             {
@@ -50,10 +54,32 @@ namespace ProductShop
             var map =  CreateMapper();
             User[] users = map.Map<User[]>(importUsersDTO);
 
+            // 4.
             context.Users.AddRange(users);
             context.SaveChanges();
 
             return $"Successfully imported {users.Length}";
+            }
+
+        public static string ImportProducts(ProductShopContext context, string inputXml)
+            {
+            // 1. Create xml serializer
+            var result = new XmlSerializer(typeof(ImportProductDTO[]), new XmlRootAttribute("Products"));
+
+
+            // 2.
+            using var reader = new StringReader(inputXml);
+            ImportProductDTO[] importDTO = (ImportProductDTO[])result.Deserialize(reader);
+
+            // 3.
+            var map = CreateMapper();
+            Product[] products = map.Map<Product[]>(importDTO);
+
+            // 4.
+            context.Products.AddRange(products);
+            context.SaveChanges();
+
+            return $"Successfully imported {products.Length}";
             }
         }
 }

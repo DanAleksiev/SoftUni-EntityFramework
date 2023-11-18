@@ -6,7 +6,7 @@ namespace ProductShop.DTOs.Import
     public class ImportProductDTO
         {
         [XmlElement("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         [XmlElement("price")]
         public decimal Price { get; set; }
@@ -15,7 +15,7 @@ namespace ProductShop.DTOs.Import
         public int SellerId { get; set; }
 
         [XmlElement("buyerId")]
-        public int BuyerId { get; set; }
+        public int? BuyerId { get; set; }
 
         }
     }
