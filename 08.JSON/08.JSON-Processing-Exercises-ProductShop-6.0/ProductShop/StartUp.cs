@@ -41,10 +41,6 @@ namespace ProductShop
             //08
             Console.WriteLine(GetUsersWithProducts(context));
 
-
-
-
-
             }
 
         public static string ImportUsers(ProductShopContext context, string inputJson)

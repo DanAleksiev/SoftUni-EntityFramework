@@ -1,6 +1,7 @@
 ﻿namespace ProductShop.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class User
     {
@@ -18,7 +19,10 @@
 
         public int? Age { get; set; }
 
-        public ICollection<Product> ProductsSold { get; set; } = null!;
-        public ICollection<Product> ProductsBought { get; set; } = null!;
+        [InverseProperty("Seller")]
+        public ICollection<Product> ProductsSold { get; set; }
+
+        [InverseProperty("Buyer")]
+        public ICollection<Product> ProductsBought { get; set; }
     }
 }
