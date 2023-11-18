@@ -38,10 +38,13 @@ namespace ProductShop
             //5
             //Console.WriteLine(GetProductsInRange(context));
 
-            //5
-            Console.WriteLine(GetSoldProducts(context));
+            //6
+            //Console.WriteLine(GetSoldProducts(context));
 
-            }
+            //7
+            Console.WriteLine(GetCategoriesByProductsCount(context));
+
+        }
         public static IMapper CreateMapper()
             {
             var configuration = new MapperConfiguration(config =>
@@ -166,6 +169,26 @@ namespace ProductShop
             var xml = new XmlFormating();
 
             return xml.Serialize<ExportSoldProductsDTO[]>(result, "Users");
+            }
+
+        public static string GetCategoriesByProductsCount(ProductShopContext context)
+            {
+            var result = context.Categories
+                .Select(x => new ExportCategoryProductDTO() 
+                {
+                    Name = x.Name,
+                    Count = x.CategoryProducts.Count,
+                    AvaragePrice = x.CategoryProducts.Average(p => p.Product.Price),
+                    TotalRevenue = x.CategoryProducts.Sum(p => p.Product.Price)
+                })
+                .OrderByDescending(x => x.Count)
+                .ThenBy(x => x.TotalRevenue)
+                .ToArray();
+
+            var xml = new XmlFormating();
+
+            return xml.Serialize<ExportCategoryProductDTO[]>(result, "Categories");
+
             }
         }
     }
