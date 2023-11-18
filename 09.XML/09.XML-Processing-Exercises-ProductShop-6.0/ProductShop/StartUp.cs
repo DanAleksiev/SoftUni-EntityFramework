@@ -23,7 +23,10 @@ namespace ProductShop
             //Console.WriteLine(ImportUsers(context, userxml));
 
             //2
-            Console.WriteLine(ImportProducts(context, productsJson));
+            //Console.WriteLine(ImportProducts(context, productsJson));
+
+            //3
+            Console.WriteLine(ImportCategories(context, categoriesJson));
 
             }
         public static IMapper CreateMapper()
@@ -46,15 +49,15 @@ namespace ProductShop
             var result = new XmlSerializer(typeof(ImportUsersDTO[]), new XmlRootAttribute("Users"));
 
 
-            // 2.
+            // 2.read the xml
             using var reader = new StringReader(inputXml);
             ImportUsersDTO[] importUsersDTO = (ImportUsersDTO[])result.Deserialize(reader);
 
-            // 3.
+            // 3.map the object
             var map =  CreateMapper();
             User[] users = map.Map<User[]>(importUsersDTO);
 
-            // 4.
+            // 4. commit to db
             context.Users.AddRange(users);
             context.SaveChanges();
 
@@ -63,23 +66,34 @@ namespace ProductShop
 
         public static string ImportProducts(ProductShopContext context, string inputXml)
             {
-            // 1. Create xml serializer
             var result = new XmlSerializer(typeof(ImportProductDTO[]), new XmlRootAttribute("Products"));
 
-
-            // 2.
             using var reader = new StringReader(inputXml);
             ImportProductDTO[] importDTO = (ImportProductDTO[])result.Deserialize(reader);
 
-            // 3.
             var map = CreateMapper();
             Product[] products = map.Map<Product[]>(importDTO);
 
-            // 4.
             context.Products.AddRange(products);
             context.SaveChanges();
 
             return $"Successfully imported {products.Length}";
+            }
+
+        public static string ImportCategories(ProductShopContext context, string inputXml)
+            {
+            var result = new XmlSerializer(typeof(ImportCategoriesDTO[]), new XmlRootAttribute("Categories"));
+
+            using var reader = new StringReader(inputXml);
+            ImportCategoriesDTO[] importDTO = (ImportCategoriesDTO[])result.Deserialize(reader);
+
+            var map = CreateMapper();
+            Category[] cat = map.Map<Category[]>(importDTO);
+
+            context.Categories.AddRange(cat);
+            context.SaveChanges();
+
+            return $"Successfully imported {cat.Length}";
             }
         }
 }
