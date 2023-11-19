@@ -118,43 +118,50 @@ namespace CarDealer
 
         public static string ImportCars(CarDealerContext context, string inputXml)
             {
-            XmlSerializer xmlSerializer =
-                new XmlSerializer(typeof(ImportCarsDTO[]), new XmlRootAttribute("Cars"));
-
-            using StringReader stringReader = new StringReader(inputXml);
-
-            ImportCarsDTO[] importCarDTOs = (ImportCarsDTO[])xmlSerializer.Deserialize(stringReader);
-
             var mapper = CreateMapper();
+            var xmlParser = new XmlFormating();
+
+            //Deserializing the Xml to Part DTOs
+            ImportCarsDTO[] carsDtos = xmlParser.Deserialize<ImportCarsDTO[]>(inputXml, "Cars");
+
+            //Mapping the Car DTOs to Cars only if their parts are unique
             List<Car> cars = new List<Car>();
+            List<PartCar> partCars = new List<PartCar>();
+            int[] allPartIds = context.Parts.Select(p => p.Id).ToArray();
+            int carId = 1;
 
-            foreach (var carDTO in importCarDTOs)
+            foreach (var dto in carsDtos)
                 {
-                Car car = mapper.Map<Car>(carDTO);
-
-                int[] carPartIds = carDTO.Parts
-                    .Select(x => x.Id)
-                    .Distinct()
-                    .ToArray();
-
-                var carParts = new List<PartCar>();
-
-                foreach (var id in carPartIds)
+                Car car = new Car()
                     {
-                    carParts.Add(new PartCar
-                        {
-                        Car = car,
-                        PartId = id
-                        });
-                    }
+                    Make = dto.Make,
+                    Model = dto.Model,
+                    TraveledDistance = dto.traveledDistance
+                    };
 
-                car.PartsCars = carParts;
                 cars.Add(car);
+
+                foreach (int partId in dto.Parts
+                    .Where(p => allPartIds.Contains(p.Id))
+                    .Select(p => p.Id)
+                    .Distinct())
+                    {
+                    PartCar partCar = new PartCar()
+                        {
+                        CarId = carId,
+                        PartId = partId
+                        };
+                    partCars.Add(partCar);
+                    }
+                carId++;
                 }
 
-            context.AddRange(cars);
-            //context.SaveChanges();
+            //Adding and Saving
+            context.Cars.AddRange(cars);
+            context.PartsCars.AddRange(partCars);
+            context.SaveChanges();
 
+            //Output
             return $"Successfully imported {cars.Count}";
             }
 
