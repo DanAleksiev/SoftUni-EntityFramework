@@ -6,22 +6,22 @@ namespace CarDealer.DTOs.Import
     public class ImportCarsDTO
         {
         [XmlElement("make")]
-        public string? Make { get; set; }
+        public string Make { get; set; }
 
         [XmlElement("model")]
-        public string? Model { get; set; }
+        public string Model { get; set; }
 
         [XmlElement("traveledDistance")]
-        public int traveledDistance { get; set; }
+        public long TraveledDistance { get; set; }
 
         [XmlArray("parts")]
-        public PartsCollection[] Parts { get; set; }
+        public PartDto[] Parts { get; set; }
         }
 
-    [XmlType("partsId")]
-    public class PartsCollection
+    [XmlType("partId")]
+    public class PartDto
         {
-        [XmlAttribute("Id")]
+        [XmlAttribute("id")]
         public int Id { get; set; }
         }
     }

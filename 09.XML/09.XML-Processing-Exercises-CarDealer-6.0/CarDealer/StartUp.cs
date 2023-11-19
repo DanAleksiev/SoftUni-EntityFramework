@@ -136,7 +136,7 @@ namespace CarDealer
                     {
                     Make = dto.Make,
                     Model = dto.Model,
-                    TraveledDistance = dto.traveledDistance
+                    TraveledDistance = dto.TraveledDistance
                     };
 
                 cars.Add(car);
@@ -159,7 +159,7 @@ namespace CarDealer
             //Adding and Saving
             context.Cars.AddRange(cars);
             context.PartsCars.AddRange(partCars);
-            context.SaveChanges();
+            //context.SaveChanges();
 
             //Output
             return $"Successfully imported {cars.Count}";
