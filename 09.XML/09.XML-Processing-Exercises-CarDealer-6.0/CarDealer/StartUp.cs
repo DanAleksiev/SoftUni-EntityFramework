@@ -30,7 +30,7 @@ namespace CarDealer
             //Console.WriteLine(ImportParts(context, partsJson));
 
             //// 11
-            Console.WriteLine(ImportCars(context, carsJson));
+            //Console.WriteLine(ImportCars(context, carsJson));
 
             //// 12
             //Console.WriteLine(ImportCustomers(context, customersJson));
@@ -39,7 +39,7 @@ namespace CarDealer
             //Console.WriteLine(ImportSales(context, salesJson));
 
             // 14
-            //Console.WriteLine(GetOrderedCustomers(context));
+            Console.WriteLine(GetCarsWithDistance(context));
 
             // 15
             //Console.WriteLine(GetCarsFromMakeToyota(context));
@@ -121,10 +121,8 @@ namespace CarDealer
             var mapper = CreateMapper();
             var xmlParser = new XmlFormating();
 
-            //Deserializing the Xml to Part DTOs
             ImportCarsDTO[] carsDtos = xmlParser.Deserialize<ImportCarsDTO[]>(inputXml, "Cars");
 
-            //Mapping the Car DTOs to Cars only if their parts are unique
             List<Car> cars = new List<Car>();
             List<PartCar> partCars = new List<PartCar>();
             int[] allPartIds = context.Parts.Select(p => p.Id).ToArray();
@@ -156,14 +154,50 @@ namespace CarDealer
                 carId++;
                 }
 
-            //Adding and Saving
+            //Adding and Savingz
             context.Cars.AddRange(cars);
             context.PartsCars.AddRange(partCars);
-            //context.SaveChanges();
+            context.SaveChanges();
 
             //Output
             return $"Successfully imported {cars.Count}";
             }
 
+        public static string ImportCustomers(CarDealerContext context, string inputXml)
+            {
+            XmlFormating formating = new XmlFormating();
+            ImportCustomersDTO[] dto = formating.Deserialize<ImportCustomersDTO[]>(inputXml, "Customers");
+
+            var map = CreateMapper();
+            Customer[] output = map.Map<Customer[]>(dto);
+
+            context.Customers.AddRange(output);
+            context.SaveChanges();
+
+            return $"Successfully imported {output.Length}";
+            }
+
+        public static string ImportSales(CarDealerContext context, string inputXml)
+            {
+            XmlFormating formating = new XmlFormating();
+            ImportSalesDTO[] dto = formating.Deserialize<ImportSalesDTO[]>(inputXml, "Sales");
+
+
+            var cars = context.Cars.Select(x => x.Id).ToArray();
+
+            var map = CreateMapper();
+            Sale[] output = map.Map<Sale[]>(dto).Where(x=>cars.Contains(x.CarId)).ToArray();
+           
+
+            context.Sales.AddRange(output);
+            context.SaveChanges();
+
+            return $"Successfully imported {output.Length}";
+            }
+
+        public static string GetCarsWithDistance(CarDealerContext context)
+            {
+
+            }
         }
     }

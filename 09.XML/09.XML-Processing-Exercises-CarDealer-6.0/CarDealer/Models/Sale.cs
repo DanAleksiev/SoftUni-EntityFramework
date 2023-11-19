@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
 
-        public decimal Discount { get; set; }
+        public decimal Discount { get; set; } = 0.0m;
 
         public int CarId { get; set; }
         public Car Car { get; set; } = null!;    

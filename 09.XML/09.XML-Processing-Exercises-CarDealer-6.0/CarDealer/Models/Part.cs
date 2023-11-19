@@ -1,12 +1,15 @@
-﻿namespace CarDealer.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CarDealer.Models
 {
     public class Part
     {
+        [Key]
         public int Id { get; set; }
 
-        public string Name { get; set; } = null!; 
+        public string Name { get; set; } = null!;
 
-        public decimal Price { get; set; }
+        public decimal Price { get; set; } = 0.0m;
 
         public int Quantity { get; set; }
 
