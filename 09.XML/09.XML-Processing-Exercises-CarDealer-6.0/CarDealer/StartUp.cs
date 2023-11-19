@@ -56,10 +56,10 @@ namespace CarDealer
             //Console.WriteLine(GetCarsWithTheirListOfParts(context));
 
             // 18
-            Console.WriteLine(GetTotalSalesByCustomer(context));
+            //Console.WriteLine(GetTotalSalesByCustomer(context));
 
             // 19
-            //Console.WriteLine(GetSalesWithAppliedDiscount(context));
+            Console.WriteLine(GetSalesWithAppliedDiscount(context));
             }
 
         public static IMapper CreateMapper()
@@ -401,10 +401,24 @@ namespace CarDealer
 
         public static string GetSalesWithAppliedDiscount(CarDealerContext context)
             {
-
+            var result = context.Sales
+                .Select(x => new ExtractSalesDiscountDTO()
+                    {
+                    CarInfo = new CarInfo()
+                        {
+                        Make = x.Car.Make,
+                        Model = x.Car.Model,
+                        TraveledDistance = x.Car.TraveledDistance,
+                        },
+                    Discount = x.Discount,
+                    CustomerName = x.Customer.Name,
+                    Price = x.Car.PartsCars.Sum(p => p.Part.Price),
+                    DiscountedPrice = (double)Math.Round(x.Car.PartsCars.Sum(p => p.Part.Price) * (1 - (x.Discount / 100)),4)
+                    } )
+                .ToArray();
 
             XmlFormating formating = new XmlFormating();
-            return formating.Serialize<ExportCarsWithTheyrPartsDTO[]>(result, "cutomers");
+            return formating.Serialize<ExtractSalesDiscountDTO[]>(result, "sales");
             }
 
         private static string SerializeToXml<T>(T dto, string xmlRootAttribute)
