@@ -278,7 +278,36 @@ namespace CarDealer
         public static string GetTotalSalesByCustomer(CarDealerContext context)
             {
             var map = CreateMapper();
+            XmlFormating formating = new XmlFormating();
 
+            //source : https://github.com/nevenafirkova/SoftUni-EntityFrameworkCore/blob/main/09.%20XML%20Processing/02.%20Car%20Dealer/StartUp.cs
+            
+            var tempDto = context.Customers
+               .Where(c => c.Sales.Any())
+               .Select(c => new
+                   {
+                   FullName = c.Name,
+                   BoughtCars = c.Sales.Count(),
+                   SalesInfo = c.Sales.Select(s => new
+                       {
+                       Prices = c.IsYoungDriver
+                           ? s.Car.PartsCars.Sum(p => Math.Round((double)p.Part.Price * 0.95, 2))
+                           : s.Car.PartsCars.Sum(p => (double)p.Part.Price)
+                       }).ToArray(),
+                   })
+               .ToArray();
+
+            TotalSalesByCustomerDto[] totalSalesDtos = tempDto
+                .OrderByDescending(t => t.SalesInfo.Sum(s => s.Prices))
+                .Select(t => new TotalSalesByCustomerDto()
+                    {
+                    FullName = t.FullName,
+                    BoughtCars = t.BoughtCars,
+                    SpentMoney = t.SalesInfo.Sum(s => s.Prices).ToString("f2")
+                    })
+                .ToArray();
+
+            return formating.Serialize<TotalSalesByCustomerDto[]>(totalSalesDtos, "customers");
             //    var result = context.Customers
             //.Where(x => x.Sales.Count > 0)
             //.Select(x => new ExportCustomersBySalesDTO()
@@ -296,10 +325,10 @@ namespace CarDealer
             //.ToArray();
 
             //Finding the Sales
-            var customersWithSales = context.Customers
-            .Include(c => c.Sales)
-            .Where(c => c.Sales.Any())
-            .ToArray();
+            //var customersWithSales = context.Customers
+            //.Include(c => c.Sales)
+            //.Where(c => c.Sales.Any())
+            //.ToArray();
 
             //var customers = customersWithSales
             //    .Select(c => new ExportCustomersBySalesDTO()
@@ -324,21 +353,21 @@ namespace CarDealer
 
             //teacher solution
             //could not be translated error message ( exited with code -532462766.)
-            var result = context.Customers
-               .Where(c => c.Sales.Count > 0)
-               .Select(c => new ExportCustomersBySalesDTO
-                   {
-                   FullName = c.Name,
-                   BoughtCars = c.Sales.Count,
-                   SpentMoney = c.Sales.Sum(s =>
-                       s.Car.PartsCars.Sum(pc =>
-                           Math.Round(c.IsYoungDriver ? pc.Part.Price * 0.95m : pc.Part.Price, 2)
-                       )
-                   )
-                   })
-               .OrderByDescending(s => s.SpentMoney)
-               .ToArray();
-            
+            //var result = context.Customers
+            //   .Where(c => c.Sales.Count > 0)
+            //   .Select(c => new ExportCustomersBySalesDTO
+            //       {
+            //       FullName = c.Name,
+            //       BoughtCars = c.Sales.Count,
+            //       SpentMoney = c.Sales.Sum(s =>
+            //           s.Car.PartsCars.Sum(pc =>
+            //               Math.Round(c.IsYoungDriver ? pc.Part.Price * 0.95m : pc.Part.Price, 2)
+            //           )
+            //       )
+            //       })
+            //   .OrderByDescending(s => s.SpentMoney)
+            //   .ToArray();
+
             //return SerializeToXml<ExportCustomersBySalesDTO[]>(totalSales, "customers");
 
             //my solution
@@ -367,11 +396,16 @@ namespace CarDealer
             //    .ToArray();
 
 
+            //return formating.Serialize<ExportCarsWithTheyrPartsDTO[]>(result, "cutomers");
+            }
+
+        public static string GetSalesWithAppliedDiscount(CarDealerContext context)
+            {
+
+
             XmlFormating formating = new XmlFormating();
             return formating.Serialize<ExportCarsWithTheyrPartsDTO[]>(result, "cutomers");
             }
-
-
 
         private static string SerializeToXml<T>(T dto, string xmlRootAttribute)
             {
