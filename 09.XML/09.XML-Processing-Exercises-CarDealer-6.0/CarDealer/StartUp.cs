@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using CarDealer.Data;
+using CarDealer.DTOs.Export;
 using CarDealer.DTOs.Import;
 using CarDealer.Models;
 using Microsoft.EntityFrameworkCore;
@@ -197,7 +199,18 @@ namespace CarDealer
 
         public static string GetCarsWithDistance(CarDealerContext context)
             {
+            var map = CreateMapper();
 
+            var result = context.Cars
+                .Where(x => x.TraveledDistance > 2000000)
+                .OrderBy(x=>x.Make)
+                .ThenBy(x=>x.Model)
+                .Take(10)
+                .ProjectTo<ExportCarsDTO>(map.ConfigurationProvider)
+                .ToArray();
+
+            XmlFormating formating = new XmlFormating();
+            return formating.Serialize<ExportCarsDTO[]>(result, "cars");
             }
         }
     }
