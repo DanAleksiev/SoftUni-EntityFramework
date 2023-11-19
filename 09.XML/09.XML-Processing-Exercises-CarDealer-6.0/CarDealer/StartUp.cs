@@ -28,29 +28,29 @@ namespace CarDealer
             //// 09
             //Console.WriteLine(ImportSuppliers(context, suppliersJson));
 
-            //// 10
+            ////10
             //Console.WriteLine(ImportParts(context, partsJson));
 
-            //// 11
+            ////11
             //Console.WriteLine(ImportCars(context, carsJson));
 
-            //// 12
+            ////12
             //Console.WriteLine(ImportCustomers(context, customersJson));
 
-            //// 13
+            ////13
             //Console.WriteLine(ImportSales(context, salesJson));
 
             // 14
             //Console.WriteLine(GetCarsWithDistance(context));
 
             // 15
-            Console.WriteLine(GetCarsFromMakeBmw(context));
+            //Console.WriteLine(GetCarsFromMakeBmw(context));
 
-            // 16
+            //16
             //Console.WriteLine(GetLocalSuppliers(context));
 
             // 17
-            //Console.WriteLine(GetCarsWithTheirListOfParts(context));
+            Console.WriteLine(GetCarsWithTheirListOfParts(context));
 
             // 18
             //Console.WriteLine(GetTotalSalesByCustomer(context));
@@ -188,8 +188,8 @@ namespace CarDealer
             var cars = context.Cars.Select(x => x.Id).ToArray();
 
             var map = CreateMapper();
-            Sale[] output = map.Map<Sale[]>(dto).Where(x=>cars.Contains(x.CarId)).ToArray();
-           
+            Sale[] output = map.Map<Sale[]>(dto).Where(x => cars.Contains(x.CarId)).ToArray();
+
 
             context.Sales.AddRange(output);
             context.SaveChanges();
@@ -203,8 +203,8 @@ namespace CarDealer
 
             var result = context.Cars
                 .Where(x => x.TraveledDistance > 2000000)
-                .OrderBy(x=>x.Make)
-                .ThenBy(x=>x.Model)
+                .OrderBy(x => x.Make)
+                .ThenBy(x => x.Model)
                 .Take(10)
                 .ProjectTo<ExportCarsDTO>(map.ConfigurationProvider)
                 .ToArray();
@@ -227,5 +227,49 @@ namespace CarDealer
             XmlFormating formating = new XmlFormating();
             return formating.Serialize<ExportCarsBMWDTO[]>(result, "cars");
             }
-        }
+
+        public static string GetLocalSuppliers(CarDealerContext context)
+            {
+            var map = CreateMapper();
+            var result = context.Suppliers
+                .Where(x => !x.IsImporter)
+                .Select(x => new ExportSuppliersWhoDontImportDTO
+                    {
+                    Id = x.Id,
+                    Name = x.Name,
+                    PartsCount = x.Parts.Count
+                    })
+                .ToArray();
+
+
+            XmlFormating formating = new XmlFormating();
+            return formating.Serialize<ExportSuppliersWhoDontImportDTO[]>(result, "suppliers");
+            }
+
+        public static string GetCarsWithTheirListOfParts(CarDealerContext context)
+            {
+            var map = CreateMapper();
+            var result = context.Cars
+                .Select(x => new ExportCarsWithTheyrPartsDTO()
+                    {
+                    Make = x.Make,
+                    Model = x.Model,
+                    TraveledDistance = x.TraveledDistance,
+                    Parts = x.PartsCars.Select(p => new CarParts(){
+                        Price = p.Part.Price,
+                        Name = p.Part.Name
+                        })
+                    .OrderByDescending(x => x.Price)
+                    .ToArray()
+                    })
+                .OrderByDescending(x=>x.TraveledDistance)
+                .ThenBy(x=>x.Model)
+                .Take(5)
+                .ToArray();
+
+
+        XmlFormating formating = new XmlFormating();
+            return formating.Serialize<ExportCarsWithTheyrPartsDTO[]>(result, "cars");
+            }
+    }
     }
