@@ -2,14 +2,16 @@
 
 namespace CarDealer.DTOs.Export
     {
-    [XmlType("cunstomer")]
-    public class ExportCustomersBySalesDTO
+    [XmlType("customer")]
+    public class TotalSalesByCustomerDto
         {
         [XmlAttribute("full-name")]
         public string FullName { get; set; }
+
         [XmlAttribute("bought-cars")]
         public int BoughtCars { get; set; }
+
         [XmlAttribute("spent-money")]
-        public decimal SpentMoney { get; set; }
-    }
+        public string SpentMoney { get; set; }
+        }
     }

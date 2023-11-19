@@ -4,8 +4,11 @@ using CarDealer.Data;
 using CarDealer.DTOs.Export;
 using CarDealer.DTOs.Import;
 using CarDealer.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ProductShop;
+using System.Globalization;
+using System.Text;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -50,10 +53,10 @@ namespace CarDealer
             //Console.WriteLine(GetLocalSuppliers(context));
 
             // 17
-            Console.WriteLine(GetCarsWithTheirListOfParts(context));
+            //Console.WriteLine(GetCarsWithTheirListOfParts(context));
 
             // 18
-            //Console.WriteLine(GetTotalSalesByCustomer(context));
+            Console.WriteLine(GetTotalSalesByCustomer(context));
 
             // 19
             //Console.WriteLine(GetSalesWithAppliedDiscount(context));
@@ -275,19 +278,125 @@ namespace CarDealer
         public static string GetTotalSalesByCustomer(CarDealerContext context)
             {
             var map = CreateMapper();
-            var result = context.Customers
-                .Where(x => x.Sales.Count > 0)
-                .Select(x => new ExportCustomersBySalesDTO()
-                    {
-                    FullName = x.Name,
-                    BoughtCars = x.Sales.Count
 
-                    })     
-                .ToArray();
+            //    var result = context.Customers
+            //.Where(x => x.Sales.Count > 0)
+            //.Select(x => new ExportCustomersBySalesDTO()
+            //    {
+            //    FullName = x.Name,
+            //    BoughtCars = x.Sales.Count,
+            //    SpendMoney = x.Sales.Select(p => new
+            //        {
+            //        Price = x.IsYoungDriver
+            //        ? p.Car.PartsCars.Sum(pc => Math.Round(decimal.Parse(pc.Part.Price) * 0.95, 2))
+            //        : p.Car.PartsCars.Sum(pc => pc.Part.Price)
+            //        }).ToArray()
+            //    })
+            //.OrderByDescending(x => x.SpendMoney)
+            //.ToArray();
+
+            //Finding the Sales
+            var customersWithSales = context.Customers
+            .Include(c => c.Sales)
+            .Where(c => c.Sales.Any())
+            .ToArray();
+
+            //var customers = customersWithSales
+            //    .Select(c => new ExportCustomersBySalesDTO()
+            //        {
+            //        FullName = c.Name,
+            //        BoughtCars = c.Sales.Count,
+            //        SpentMoney = c.Sales
+            //            .SelectMany(s => s.Car.PartsCars)
+            //            .Join(
+            //                context.Parts,
+            //                pc => pc.PartId,
+            //                p => p.Id,
+            //                (pc, p) => c.IsYoungDriver
+            //                    ? ((decimal)Math.Round((double)pc.Part.Price * 0.95, 2))
+            //                    : pc.Part.Price
+            //            )
+            //            .Sum()
+            //        })
+            //    .OrderByDescending(c => c.SpentMoney)
+            //    .ToArray();
+
+
+            //teacher solution
+            //could not be translated error message ( exited with code -532462766.)
+            var result = context.Customers
+               .Where(c => c.Sales.Count > 0)
+               .Select(c => new ExportCustomersBySalesDTO
+                   {
+                   FullName = c.Name,
+                   BoughtCars = c.Sales.Count,
+                   SpentMoney = c.Sales.Sum(s =>
+                       s.Car.PartsCars.Sum(pc =>
+                           Math.Round(c.IsYoungDriver ? pc.Part.Price * 0.95m : pc.Part.Price, 2)
+                       )
+                   )
+                   })
+               .OrderByDescending(s => s.SpentMoney)
+               .ToArray();
+            
+            //return SerializeToXml<ExportCustomersBySalesDTO[]>(totalSales, "customers");
+
+            //my solution
+            // fails at the return ....
+
+            //var result = context.Customers
+            //    .Include(c => c.Sales)
+            //    .Where(c => c.Sales.Any())
+            //    .Where(x => x.Sales.Count > 0)
+            //    .Select(x => new ExportCustomersBySalesDTO()
+            //        {
+            //        FullName = x.Name,
+            //        BoughtCars = x.Sales.Count,
+            //        SpentMoney = x.Sales
+            //            .SelectMany(p => p.Car.PartsCars)
+            //            .Join(
+            //                context.Parts,
+            //                pc => pc.PartId,
+            //                p => p.Id,
+            //                (pc, p) => x.IsYoungDriver
+            //            ? ((decimal)Math.Round((double)pc.Part.Price * 0.95, 2))
+            //            : pc.Part.Price).Sum()
+            //        })
+            //    .OrderByDescending(x => x.SpentMoney)
+            //    .ProjectTo<ExportCustomersBySalesDTO>(map.ConfigurationProvider)
+            //    .ToArray();
 
 
             XmlFormating formating = new XmlFormating();
-            return formating.Serialize<ExportCustomersBySalesDTO[]>(result, "customers");
+            return formating.Serialize<ExportCarsWithTheyrPartsDTO[]>(result, "cutomers");
+            }
+
+
+
+        private static string SerializeToXml<T>(T dto, string xmlRootAttribute)
+            {
+            XmlSerializer xmlSerializer =
+                new XmlSerializer(typeof(T), new XmlRootAttribute(xmlRootAttribute));
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            using (StringWriter stringWriter = new StringWriter(stringBuilder, CultureInfo.InvariantCulture))
+                {
+                XmlSerializerNamespaces xmlSerializerNamespaces = new XmlSerializerNamespaces();
+                xmlSerializerNamespaces.Add(string.Empty, string.Empty);
+
+                try
+                    {
+                    xmlSerializer.Serialize(stringWriter, dto, xmlSerializerNamespaces);
+                    }
+                catch (Exception)
+                    {
+
+                    throw;
+                    }
+                }
+
+            return stringBuilder.ToString();
             }
         }
     }
