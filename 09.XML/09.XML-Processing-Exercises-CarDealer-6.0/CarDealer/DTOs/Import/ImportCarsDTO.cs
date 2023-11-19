@@ -14,14 +14,14 @@ namespace CarDealer.DTOs.Import
         [XmlElement("traveledDistance")]
         public int traveledDistance { get; set; }
 
-        //[XmlArray("parts")]
+        [XmlArray("parts")]
         public PartsCollection[] Parts { get; set; }
         }
 
-    [XmlType("parts")]
+    [XmlType("partsId")]
     public class PartsCollection
         {
-        [XmlElement("partId")]
+        [XmlAttribute("Id")]
         public int Id { get; set; }
         }
     }
