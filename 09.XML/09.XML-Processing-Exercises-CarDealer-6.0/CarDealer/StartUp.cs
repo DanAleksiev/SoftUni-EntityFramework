@@ -255,21 +255,39 @@ namespace CarDealer
                     Make = x.Make,
                     Model = x.Model,
                     TraveledDistance = x.TraveledDistance,
-                    Parts = x.PartsCars.Select(p => new CarParts(){
+                    Parts = x.PartsCars.Select(p => new CarParts()
+                        {
                         Price = p.Part.Price,
                         Name = p.Part.Name
                         })
                     .OrderByDescending(x => x.Price)
                     .ToArray()
                     })
-                .OrderByDescending(x=>x.TraveledDistance)
-                .ThenBy(x=>x.Model)
+                .OrderByDescending(x => x.TraveledDistance)
+                .ThenBy(x => x.Model)
                 .Take(5)
                 .ToArray();
 
 
-        XmlFormating formating = new XmlFormating();
+            XmlFormating formating = new XmlFormating();
             return formating.Serialize<ExportCarsWithTheyrPartsDTO[]>(result, "cars");
             }
-    }
+        public static string GetTotalSalesByCustomer(CarDealerContext context)
+            {
+            var map = CreateMapper();
+            var result = context.Customers
+                .Where(x => x.Sales.Count > 0)
+                .Select(x => new ExportCustomersBySalesDTO()
+                    {
+                    FullName = x.Name,
+                    BoughtCars = x.Sales.Count
+
+                    })     
+                .ToArray();
+
+
+            XmlFormating formating = new XmlFormating();
+            return formating.Serialize<ExportCustomersBySalesDTO[]>(result, "customers");
+            }
+        }
     }
