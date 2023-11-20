@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "LgeB3Rxsgjd2wbQC/rTYL9+nEUkLIJ+QLEtIl2eTM9J2p+3XeGgz57NgxqMqjzaOo/plrxFZrwjAVRfiflgqhw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\CheetSheet\\CheetSheet\\CheetSheet.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\toksi\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\toksi\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}
