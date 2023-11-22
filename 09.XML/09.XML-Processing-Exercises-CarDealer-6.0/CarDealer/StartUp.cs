@@ -291,10 +291,8 @@ namespace CarDealer
                    SalesInfo = c.Sales.Select(s => new
                        {
                        Prices = c.IsYoungDriver
-                           ? s.Car.PartsCars
-                           .Sum(p => Math.Round((double)p.Part.Price * 0.95, 2))
-                           : s.Car.PartsCars
-                           .Sum(p => (double)p.Part.Price)
+                           ? s.Car.PartsCars.Sum(p => Math.Round((double)p.Part.Price * 0.95, 2))
+                           : s.Car.PartsCars.Sum(p => (double)p.Part.Price)
                        }).ToArray(),
                    })
                .ToArray();
