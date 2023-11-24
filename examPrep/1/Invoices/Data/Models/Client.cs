@@ -8,7 +8,7 @@ namespace Invoices.Data.Models
             {
             Invoices = new List<Invoice>();
             Addresses = new List<Address>();
-            ProductsClients = new List<ProductsClients>();
+            ProductsClients = new List<ProductClient>();
             }
 
         [Key]
@@ -21,6 +21,6 @@ namespace Invoices.Data.Models
         public string? NumberVat { get; set; }
         public ICollection<Invoice>? Invoices { get; set; }
         public ICollection<Address>? Addresses { get; set; }
-        public ICollection<ProductsClients>? ProductsClients { get; set; }
+        public ICollection<ProductClient>? ProductsClients { get; set; }
         }
     }

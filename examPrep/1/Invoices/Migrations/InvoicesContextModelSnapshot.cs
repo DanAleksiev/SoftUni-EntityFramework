@@ -118,7 +118,7 @@ namespace Invoices.Migrations
                     b.ToTable("Invoices");
                 });
 
-            modelBuilder.Entity("Invoices.Data.Models.Products", b =>
+            modelBuilder.Entity("Invoices.Data.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -126,7 +126,7 @@ namespace Invoices.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CategoryItem")
+                    b.Property<int>("CategoryType")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -142,7 +142,7 @@ namespace Invoices.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Invoices.Data.Models.ProductsClients", b =>
+            modelBuilder.Entity("Invoices.Data.Models.ProductClient", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -179,7 +179,7 @@ namespace Invoices.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("Invoices.Data.Models.ProductsClients", b =>
+            modelBuilder.Entity("Invoices.Data.Models.ProductClient", b =>
                 {
                     b.HasOne("Invoices.Data.Models.Client", "Client")
                         .WithMany("ProductsClients")
@@ -187,7 +187,7 @@ namespace Invoices.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Invoices.Data.Models.Products", "Products")
+                    b.HasOne("Invoices.Data.Models.Product", "Product")
                         .WithMany("ProductsClients")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -195,7 +195,7 @@ namespace Invoices.Migrations
 
                     b.Navigation("Client");
 
-                    b.Navigation("Products");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Invoices.Data.Models.Client", b =>
@@ -207,7 +207,7 @@ namespace Invoices.Migrations
                     b.Navigation("ProductsClients");
                 });
 
-            modelBuilder.Entity("Invoices.Data.Models.Products", b =>
+            modelBuilder.Entity("Invoices.Data.Models.Product", b =>
                 {
                     b.Navigation("ProductsClients");
                 });

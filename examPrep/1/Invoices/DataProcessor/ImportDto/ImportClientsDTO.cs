@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace Invoices.DataProcessor.ImportDto
     {
-    [XmlType("client")]
+    [XmlType("Client")]
     public class ImportClientsDTO
         {
         [XmlElement("Name")]

@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Invoices.Data.Models
     {
-    public class ProductsClients
+    public class ProductClient
         {
         [Required]
         [ForeignKey(nameof(Product))]
         public int ProductId { get; set; }
-        public Products? Product { get; set; }
+        public Product? Product { get; set; }
 
         [Required]
         [ForeignKey(nameof(Client))]
