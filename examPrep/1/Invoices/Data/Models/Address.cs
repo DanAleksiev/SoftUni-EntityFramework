@@ -8,21 +8,21 @@ namespace Invoices.Data.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        [MinLength(10), MaxLength(20)]
-        public string? StreetName { get; set; }
+        [MaxLength(20)]
+        public string StreetName { get; set; }
         [Required]
         public int StreetNumber { get; set; }
         [Required]
-        public string? PostCode { get; set; }
+        public string PostCode { get; set; }
         [Required]
-        [MinLength(5), MaxLength(15)]
-        public string? City { get; set; }
+        [MaxLength(15)]
+        public string City { get; set; }
         [Required]
-        [MinLength(5), MaxLength(15)]
-        public string? Country { get; set; }
+        [MaxLength(15)]
+        public string Country { get; set; }
         [Required]
-        [ForeignKey(nameof(Client))]
         public int ClientId { get; set; }
-        public Client? Client { get; set; }
+        [ForeignKey(nameof(ClientId))]
+        public Client Client { get; set; }
         }
     }

@@ -10,7 +10,6 @@ namespace Invoices.Data.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        [Range(1000000000, 1500000000)]
         public int Number { get; set; }
         [Required]
         public DateTime IssueDate { get; set; }
@@ -21,8 +20,8 @@ namespace Invoices.Data.Models
         [Required]
         public CurrencyTypeEnum CurrencyType { get; set; }
         [Required]
-        [ForeignKey(nameof(Client))]
         public int ClientId { get; set; }
-        public Client? Client { get; set; }
+        [ForeignKey(nameof(ClientId))]
+        public Client Client { get; set; }
         }
     }
