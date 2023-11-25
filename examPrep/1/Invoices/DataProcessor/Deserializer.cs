@@ -69,6 +69,7 @@
                     }
 
                 }
+            context.Clients.AddRange(clients);   
             context.SaveChanges();
             return sb.ToString().Trim();
         }
@@ -79,7 +80,7 @@
             List<ImportInvoicesDTO> dto = jsonString.DeserializeFromJson<List<ImportInvoicesDTO>>();
             StringBuilder sb = new StringBuilder();
 
-            List<Invoice> clients = new List<Invoice>();
+            List<Invoice> invoices = new List<Invoice>();
             foreach (var invoice in dto)
                 {
                 if (!IsValid(invoice) || invoice.IssueDate > invoice.DueDate)
@@ -100,9 +101,10 @@
                     };
 
                     sb.AppendLine(string.Format(SuccessfullyImportedInvoices, invoice.Number));
-                    clients.Add(newInvoice);
+                    invoices.Add(newInvoice);
 
                 }
+            context.Invoices.AddRange(invoices);
             context.SaveChanges();
             return sb.ToString().Trim();
             }
@@ -147,10 +149,11 @@
                         }
                     }
 
-                sb.AppendLine(string.Format(SuccessfullyImportedProducts, product.Name, product.Clients.Count()));
+                sb.AppendLine(string.Format(SuccessfullyImportedProducts, newProduct.Name, newProduct.ProductsClients.Count()));
                 products.Add(newProduct);
 
                 }
+            context.Products.AddRange(products);
             context.SaveChanges();
             return sb.ToString().Trim();
             }
