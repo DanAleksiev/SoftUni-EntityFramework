@@ -1,6 +1,6 @@
 ﻿namespace Invoices.Data.Models.Enums
     {
-    public enum CurrencyTypeEnum
+    public enum CurrencyType
         {
         BGN,
         EUR,

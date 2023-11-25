@@ -14,7 +14,7 @@ namespace Invoices.Data.Models
         [Required]
         public decimal Price { get; set; }
         [Required]
-        public CategoryTypesEnum CategoryType { get; set; }
+        public CategoryType CategoryType { get; set; }
 
         public virtual ICollection<ProductClient> ProductsClients { get; set; } = new HashSet<ProductClient>();
 

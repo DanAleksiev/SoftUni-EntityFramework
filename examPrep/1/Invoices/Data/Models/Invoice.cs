@@ -18,7 +18,7 @@ namespace Invoices.Data.Models
         [Required]
         public decimal Amount { get; set; }
         [Required]
-        public CurrencyTypeEnum CurrencyType { get; set; }
+        public CurrencyType CurrencyType { get; set; }
         [Required]
         public int ClientId { get; set; }
         [ForeignKey(nameof(ClientId))]

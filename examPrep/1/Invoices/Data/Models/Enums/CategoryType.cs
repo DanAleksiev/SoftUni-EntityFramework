@@ -1,6 +1,6 @@
 ﻿namespace Invoices.Data.Models.Enums
     {
-    public enum CategoryTypesEnum
+    public enum CategoryType
         {
         ADR,
         Filters,
