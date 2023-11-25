@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
+using Newtonsoft.Json.Converters;
 
 namespace Invoices.Extentions
     {
@@ -11,6 +11,10 @@ namespace Invoices.Extentions
                 {
                 NullValueHandling = NullValueHandling.Ignore,
                 Formatting = Formatting.Indented,
+                Converters = new List<JsonConverter>()
+                    {
+                    new StringEnumConverter()
+                    }
                 };
 
             string result = JsonConvert.SerializeObject(obj, jsonSerializer);

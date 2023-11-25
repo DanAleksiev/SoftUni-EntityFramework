@@ -1,6 +1,7 @@
 ﻿namespace Invoices.DataProcessor
     {
     using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
     using System.Text;
     using AutoMapper;
     using Invoices.Data;
@@ -79,11 +80,13 @@
         {
             List<ImportInvoicesDTO> dto = jsonString.DeserializeFromJson<List<ImportInvoicesDTO>>();
             StringBuilder sb = new StringBuilder();
-
-            List<Invoice> invoices = new List<Invoice>();
+            List <Invoice> invoices = new List<Invoice>();
             foreach (var invoice in dto)
                 {
-                if (!IsValid(invoice) || invoice.IssueDate > invoice.DueDate)
+                DateTime issueDate = DateTime.ParseExact(invoice.IssueDate, "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture);
+                DateTime dueDate = DateTime.ParseExact(invoice.DueDate, "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture);
+
+                if (!IsValid(invoice)|| issueDate > dueDate)
                     {
                     sb.AppendLine(ErrorMessage);
                     continue;
@@ -93,8 +96,8 @@
                 var newInvoice = new Invoice
                     {
                     Number = invoice.Number,
-                    IssueDate = invoice.IssueDate,
-                    DueDate = invoice.DueDate,
+                    IssueDate = issueDate,
+                    DueDate = dueDate,
                     Amount  = invoice.Amount,
                     CurrencyType = invoice.CurrencyType,
                     ClientId = invoice.ClientId,

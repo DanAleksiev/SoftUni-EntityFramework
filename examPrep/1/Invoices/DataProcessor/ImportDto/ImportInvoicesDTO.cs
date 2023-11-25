@@ -9,9 +9,9 @@ namespace Invoices.DataProcessor.ImportDto
         [Range(1000000000, 1500000000)]
         public int Number { get; set; }
         [Required]
-        public DateTime IssueDate { get; set; }
+        public string IssueDate { get; set; }
         [Required]
-        public DateTime DueDate { get; set; }
+        public string DueDate { get; set; }
         [Required]
         public decimal Amount { get; set; }
         [Required]
