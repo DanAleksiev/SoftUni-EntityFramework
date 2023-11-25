@@ -1,12 +1,12 @@
 ﻿using System.Text;
 using System.Xml.Serialization;
 
-namespace ProductShop
-    {
+namespace Invoices.Extentions
+{
     internal class XmlFormating
-        {
+    {
         public T Deserialize<T>(string inputXml, string rootName)
-            {
+        {
             XmlRootAttribute xmlRoot = new XmlRootAttribute(rootName);
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(T), xmlRoot);
 
@@ -14,10 +14,10 @@ namespace ProductShop
             T deserializedObj = (T)xmlSerializer.Deserialize(reader);
 
             return deserializedObj;
-            }
+        }
 
         public T[] DeserializeCollection<T>(string inputXml, string rootName)
-            {
+        {
             XmlRootAttribute xmlRoot = new XmlRootAttribute(rootName);
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(T[]), xmlRoot);
 
@@ -25,10 +25,10 @@ namespace ProductShop
             T[] deserializedObj = (T[])xmlSerializer.Deserialize(reader);
 
             return deserializedObj;
-            }
+        }
 
         public string Serialize<T>(T obj, string rootName)
-            {
+        {
             XmlRootAttribute xmlRootAttribute = new XmlRootAttribute(rootName);
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(T), xmlRootAttribute);
 
@@ -40,10 +40,10 @@ namespace ProductShop
 
             xmlSerializer.Serialize(writer, obj, namespaces);
             return sb.ToString().TrimEnd();
-            }
+        }
 
         public string Serialize<T>(T[] obj, string rootName)
-            {
+        {
             XmlRootAttribute xmlRootAttribute = new XmlRootAttribute(rootName);
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(T[]), xmlRootAttribute);
 
@@ -55,6 +55,6 @@ namespace ProductShop
 
             xmlSerializer.Serialize(writer, obj, namespaces);
             return sb.ToString().TrimEnd();
-            }
         }
     }
+}
