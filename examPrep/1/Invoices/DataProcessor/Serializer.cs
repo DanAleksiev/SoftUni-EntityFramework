@@ -27,10 +27,11 @@
                         {
                         InvoiceNumber = i.Number,
                         InvoiceAmount = i.Amount,
-                        DueDate = i.DueDate.ToString("d", CultureInfo.InvariantCulture),
+                        //DueDate = i.DueDate.ToString("d", CultureInfo.InvariantCulture),
+                        DueDate = i.DueDate.ToString("MM/dd/yyyy"),
                         Currency = i.CurrencyType.ToString(),
                         })
-                   
+
                     .ToArray()
                     })
                 .OrderByDescending(c => c.Invoices.Count())
