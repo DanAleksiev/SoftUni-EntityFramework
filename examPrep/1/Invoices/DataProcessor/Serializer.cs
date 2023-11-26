@@ -4,13 +4,41 @@
     using Invoices.DataProcessor.ExportDto;
     using Invoices.Extentions;
     using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Globalization;
     using System.Linq;
 
     public class Serializer
         {
         public static string ExportClientsWithTheirInvoices(InvoicesContext context, DateTime date)
             {
-            throw new NotImplementedException();
+            var result = context.Clients
+                .Where(c => c.Invoices.Any(c => c.IssueDate > date))
+                .ToArray()
+                .Select(c => new ExportClientsWithTheirInvoicesDTO()
+                    {
+                    InvoicesCount = c.Invoices.Count(),
+                    ClientName = c.Name,
+                    VatNumber = c.NumberVat,
+                    Invoices = c.Invoices
+                    .OrderBy(i => i.IssueDate)
+                    .ThenByDescending(i => i.DueDate)
+                    .Select(i => new AllInvoices()
+                        {
+                        InvoiceNumber = i.Number,
+                        InvoiceAmount = i.Amount,
+                        DueDate = i.DueDate.ToString("d", CultureInfo.InvariantCulture),
+                        Currency = i.CurrencyType.ToString(),
+                        })
+                   
+                    .ToArray()
+                    })
+                .OrderByDescending(c => c.Invoices.Count())
+                .ThenBy(c => c.ClientName)
+                .ToArray();
+
+            XmlFormating xmlFormater = new XmlFormating();
+            return xmlFormater.Serialize<ExportClientsWithTheirInvoicesDTO[]>(result, "Clients");
             }
 
         public static string ExportProductsWithMostClients(InvoicesContext context, int nameLength)
@@ -28,10 +56,10 @@
                         .Where(p => p.Client.Name.Length >= nameLength)
                         .Select(pc => new ClientsForProduct()
 
-                        {
-                        Name = pc.Client.Name,
-                        NumberVat = pc.Client.NumberVat
-                        })
+                            {
+                            Name = pc.Client.Name,
+                            NumberVat = pc.Client.NumberVat
+                            })
                     .OrderBy(pc => pc.Name)
                     .ToArray(),
                     })
