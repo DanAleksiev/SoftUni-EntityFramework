@@ -4,6 +4,7 @@
     using Invoices.DataProcessor.ExportDto;
     using Invoices.Extentions;
     using Microsoft.EntityFrameworkCore;
+    using System.Linq;
 
     public class Serializer
         {
@@ -15,7 +16,7 @@
         public static string ExportProductsWithMostClients(InvoicesContext context, int nameLength)
             {
             var products = context.Products
-                .Where(p => p.ProductsClients.Any() && p.Name.Length >= nameLength)
+                .Where(p => p.ProductsClients.Any(p => p.Client.Name.Length > nameLength))
                 .Include(p => p.ProductsClients)
                 .ThenInclude(pc => pc.Client)
                 .Select(p => new ExportProductsWithMostClientsDTO
