@@ -19,7 +19,7 @@ namespace Boardgames.DataProcessor.ImportDto
 
 
         [Required]
-        //[RegularExpression(@"^([w]{3}.{1}(\w*[-]*\w*).com)$")]
+        [RegularExpression(@"^([w]{3}.{1}(\w*[-]*\w*).com)$")]
         public string Website { get; set; }
 
         public int[] Boardgames { get; set; }

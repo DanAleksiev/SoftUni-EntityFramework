@@ -79,7 +79,7 @@
             StringBuilder sb = new StringBuilder();
             List<Seller> sellers = new List<Seller>();
 
-            var boardgames = context.Boardgames.Select(b => b.Id);
+            var boardgames = context.Boardgames.Select(b => b.Id).ToArray();
 
             foreach (var seller in dto)
                 {
@@ -97,7 +97,7 @@
                     Website = seller.Website,
                     };
 
-                foreach (var bg in seller.Boardgames)
+                foreach (var bg in seller.Boardgames.Distinct())
                     {
                     if (!boardgames.Contains(bg))
                         {
