@@ -58,3 +58,5 @@ C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\examPrep\3\Trucks\
 C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\examPrep\3\Trucks\obj\Debug\net6.0\Trucks.pdb
 C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\examPrep\3\Trucks\obj\Debug\net6.0\Trucks.genruntimeconfig.cache
 C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\examPrep\3\Trucks\obj\Debug\net6.0\ref\Trucks.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\examPrep\3\Trucks\bin\Debug\net6.0\Humanizer.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\examPrep\3\Trucks\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
