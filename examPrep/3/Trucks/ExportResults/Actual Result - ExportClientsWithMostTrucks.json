@@ -1,0 +1,356 @@
+[
+  {
+    "Name": "Buchen UmweltService GmbH",
+    "Trucks": [
+      {
+        "TruckRegistrationNumber": "CT2699CK",
+        "VinNumber": "XLEG4X21115261281",
+        "TankCapacity": 1235,
+        "CargoCapacity": 28921,
+        "CategoryType": "Flatbed",
+        "MakeType": "Daf"
+      },
+      {
+        "TruckRegistrationNumber": "CT5650PB",
+        "VinNumber": "WDB96341311389276",
+        "TankCapacity": 1420,
+        "CargoCapacity": 14798,
+        "CategoryType": "Flatbed",
+        "MakeType": "Daf"
+      },
+      {
+        "TruckRegistrationNumber": "CT1157HH",
+        "VinNumber": "WDB96341311356127",
+        "TankCapacity": 1420,
+        "CargoCapacity": 28097,
+        "CategoryType": "Flatbed",
+        "MakeType": "Man"
+      },
+      {
+        "TruckRegistrationNumber": "CT5629PB",
+        "VinNumber": "WDB96341311388385",
+        "TankCapacity": 1420,
+        "CargoCapacity": 8752,
+        "CategoryType": "Flatbed",
+        "MakeType": "Man"
+      }
+    ]
+  },
+  {
+    "Name": "ELEKTON AO",
+    "Trucks": [
+      {
+        "TruckRegistrationNumber": "CT9044HM",
+        "VinNumber": "WDB96341311356134",
+        "TankCapacity": 1420,
+        "CargoCapacity": 28097,
+        "CategoryType": "Flatbed",
+        "MakeType": "Man"
+      },
+      {
+        "TruckRegistrationNumber": "CT3093BB",
+        "VinNumber": "XLRTE47MS1G146691",
+        "TankCapacity": 1290,
+        "CargoCapacity": 28307,
+        "CategoryType": "Flatbed",
+        "MakeType": "Mercedes"
+      },
+      {
+        "TruckRegistrationNumber": "CB9655TX",
+        "VinNumber": "YS2R4X211D5332926",
+        "TankCapacity": 1400,
+        "CargoCapacity": 25000,
+        "CategoryType": "Flatbed",
+        "MakeType": "Scania"
+      },
+      {
+        "TruckRegistrationNumber": "CT5617PB",
+        "VinNumber": "WDB96341311389277",
+        "TankCapacity": 1420,
+        "CargoCapacity": 6421,
+        "CategoryType": "Flatbed",
+        "MakeType": "Volvo"
+      }
+    ]
+  },
+  {
+    "Name": "Gebr. Mayer GmbH & Co. KG",
+    "Trucks": [
+      {
+        "TruckRegistrationNumber": "CT5206MM",
+        "VinNumber": "WDB96341311261287",
+        "TankCapacity": 1420,
+        "CargoCapacity": 28058,
+        "CategoryType": "Flatbed",
+        "MakeType": "Daf"
+      },
+      {
+        "TruckRegistrationNumber": "CT9044HM",
+        "VinNumber": "WDB96341311356134",
+        "TankCapacity": 1420,
+        "CargoCapacity": 28097,
+        "CategoryType": "Flatbed",
+        "MakeType": "Man"
+      },
+      {
+        "TruckRegistrationNumber": "CT5205MM",
+        "VinNumber": "WDB96341311261296",
+        "TankCapacity": 1420,
+        "CargoCapacity": 28058,
+        "CategoryType": "Flatbed",
+        "MakeType": "Scania"
+      },
+      {
+        "TruckRegistrationNumber": "CT5204MM",
+        "VinNumber": "WDB96341311261293",
+        "TankCapacity": 1420,
+        "CargoCapacity": 28058,
+        "CategoryType": "Flatbed",
+        "MakeType": "Volvo"
+      }
+    ]
+  },
+  {
+    "Name": "KRIPTON GmbH",
+    "Trucks": [
+      {
+        "TruckRegistrationNumber": "CT5630PB",
+        "VinNumber": "WDB96341311388386",
+        "TankCapacity": 1420,
+        "CargoCapacity": 15083,
+        "CategoryType": "Flatbed",
+        "MakeType": "Mercedes"
+      },
+      {
+        "TruckRegistrationNumber": "CT5639PB",
+        "VinNumber": "WDB96341311389271",
+        "TankCapacity": 1420,
+        "CargoCapacity": 11073,
+        "CategoryType": "Flatbed",
+        "MakeType": "Mercedes"
+      },
+      {
+        "TruckRegistrationNumber": "CT5635PB",
+        "VinNumber": "WDB96341311388388",
+        "TankCapacity": 1420,
+        "CargoCapacity": 10289,
+        "CategoryType": "Flatbed",
+        "MakeType": "Scania"
+      },
+      {
+        "TruckRegistrationNumber": "CT5617PB",
+        "VinNumber": "WDB96341311389277",
+        "TankCapacity": 1420,
+        "CargoCapacity": 6421,
+        "CategoryType": "Flatbed",
+        "MakeType": "Volvo"
+      }
+    ]
+  },
+  {
+    "Name": "North Sea Express",
+    "Trucks": [
+      {
+        "TruckRegistrationNumber": "CT2699CK",
+        "VinNumber": "XLEG4X21115261281",
+        "TankCapacity": 1235,
+        "CargoCapacity": 28921,
+        "CategoryType": "Flatbed",
+        "MakeType": "Daf"
+      },
+      {
+        "TruckRegistrationNumber": "CT1157HH",
+        "VinNumber": "WDB96341311356127",
+        "TankCapacity": 1420,
+        "CargoCapacity": 28097,
+        "CategoryType": "Flatbed",
+        "MakeType": "Man"
+      },
+      {
+        "TruckRegistrationNumber": "CT5648PB",
+        "VinNumber": "WDB96341311388187",
+        "TankCapacity": 1420,
+        "CargoCapacity": 13039,
+        "CategoryType": "Flatbed",
+        "MakeType": "Volvo"
+      },
+      {
+        "TruckRegistrationNumber": "CT4963PM",
+        "VinNumber": "W1T96341311427817",
+        "TankCapacity": 1420,
+        "CargoCapacity": 8168,
+        "CategoryType": "Flatbed",
+        "MakeType": "Volvo"
+      }
+    ]
+  },
+  {
+    "Name": "OLIVOMUNDO – SOCIEDADE AGRICOLA LDA",
+    "Trucks": [
+      {
+        "TruckRegistrationNumber": "CT1230BB",
+        "VinNumber": "XLRTE47MS1G146164",
+        "TankCapacity": 1290,
+        "CargoCapacity": 28295,
+        "CategoryType": "Flatbed",
+        "MakeType": "Daf"
+      },
+      {
+        "TruckRegistrationNumber": "CB2117XT",
+        "VinNumber": "XLRTE47MS1G141136",
+        "TankCapacity": 1290,
+        "CargoCapacity": 26317,
+        "CategoryType": "Flatbed",
+        "MakeType": "Daf"
+      },
+      {
+        "TruckRegistrationNumber": "CB2071XT",
+        "VinNumber": "XLRTE47MS1G141194",
+        "TankCapacity": 1290,
+        "CargoCapacity": 27317,
+        "CategoryType": "Flatbed",
+        "MakeType": "Scania"
+      },
+      {
+        "TruckRegistrationNumber": "CT6631TT",
+        "VinNumber": "XLRTE47MS1G141929",
+        "TankCapacity": 1200,
+        "CargoCapacity": 27303,
+        "CategoryType": "Flatbed",
+        "MakeType": "Scania"
+      }
+    ]
+  },
+  {
+    "Name": "SAFPLAST GmbH",
+    "Trucks": [
+      {
+        "TruckRegistrationNumber": "CT5627PB",
+        "VinNumber": "WDB96341311389285",
+        "TankCapacity": 1420,
+        "CargoCapacity": 19156,
+        "CategoryType": "Flatbed",
+        "MakeType": "Daf"
+      },
+      {
+        "TruckRegistrationNumber": "CT3094CB",
+        "VinNumber": "W1T96341311428767",
+        "TankCapacity": 1420,
+        "CargoCapacity": 12817,
+        "CategoryType": "Flatbed",
+        "MakeType": "Daf"
+      },
+      {
+        "TruckRegistrationNumber": "CT5639PB",
+        "VinNumber": "WDB96341311389271",
+        "TankCapacity": 1420,
+        "CargoCapacity": 11073,
+        "CategoryType": "Flatbed",
+        "MakeType": "Mercedes"
+      },
+      {
+        "TruckRegistrationNumber": "CT3091BB",
+        "VinNumber": "XLRTE47MS1G146648",
+        "TankCapacity": 1290,
+        "CargoCapacity": 28307,
+        "CategoryType": "Flatbed",
+        "MakeType": "Scania"
+      }
+    ]
+  },
+  {
+    "Name": "Schmidt Gastransporte GmbH & Co KG",
+    "Trucks": [
+      {
+        "TruckRegistrationNumber": "CT5650PB",
+        "VinNumber": "WDB96341311389276",
+        "TankCapacity": 1420,
+        "CargoCapacity": 14798,
+        "CategoryType": "Flatbed",
+        "MakeType": "Daf"
+      },
+      {
+        "TruckRegistrationNumber": "CT1437BB",
+        "VinNumber": "XLRTE47MS1G146235",
+        "TankCapacity": 1290,
+        "CargoCapacity": 28295,
+        "CategoryType": "Flatbed",
+        "MakeType": "Man"
+      },
+      {
+        "TruckRegistrationNumber": "CT1439BB",
+        "VinNumber": "XLRTE47MS1G146275",
+        "TankCapacity": 1200,
+        "CargoCapacity": 28295,
+        "CategoryType": "Flatbed",
+        "MakeType": "Mercedes"
+      },
+      {
+        "TruckRegistrationNumber": "CT1231BB",
+        "VinNumber": "XLRTE47MS1G146652",
+        "TankCapacity": 1290,
+        "CargoCapacity": 28307,
+        "CategoryType": "Flatbed",
+        "MakeType": "Scania"
+      }
+    ]
+  },
+  {
+    "Name": "ABC-Logistik GmbH",
+    "Trucks": [
+      {
+        "TruckRegistrationNumber": "CT9044HM",
+        "VinNumber": "WDB96341311356134",
+        "TankCapacity": 1420,
+        "CargoCapacity": 28097,
+        "CategoryType": "Flatbed",
+        "MakeType": "Man"
+      },
+      {
+        "TruckRegistrationNumber": "CT9047HM",
+        "VinNumber": "WDB96341311356135",
+        "TankCapacity": 1420,
+        "CargoCapacity": 28097,
+        "CategoryType": "Flatbed",
+        "MakeType": "Mercedes"
+      },
+      {
+        "TruckRegistrationNumber": "CB0441XT",
+        "VinNumber": "XLRTE47MS1G141844",
+        "TankCapacity": 1290,
+        "CargoCapacity": 27317,
+        "CategoryType": "Flatbed",
+        "MakeType": "Mercedes"
+      }
+    ]
+  },
+  {
+    "Name": "B.T. TRASPORTI SRL",
+    "Trucks": [
+      {
+        "TruckRegistrationNumber": "CT5629PB",
+        "VinNumber": "WDB96341311388385",
+        "TankCapacity": 1420,
+        "CargoCapacity": 8752,
+        "CategoryType": "Flatbed",
+        "MakeType": "Man"
+      },
+      {
+        "TruckRegistrationNumber": "CT5645PB",
+        "VinNumber": "WDB96341311388186",
+        "TankCapacity": 1420,
+        "CargoCapacity": 6036,
+        "CategoryType": "Flatbed",
+        "MakeType": "Man"
+      },
+      {
+        "TruckRegistrationNumber": "CT5635PB",
+        "VinNumber": "WDB96341311388388",
+        "TankCapacity": 1420,
+        "CargoCapacity": 10289,
+        "CategoryType": "Flatbed",
+        "MakeType": "Scania"
+      }
+    ]
+  }
+]
