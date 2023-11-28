@@ -30,6 +30,6 @@ namespace Trucks.Data.Models
         public Despatcher Despatcher { get; set; }
 
         public ICollection<ClientTruck> ClientsTrucks { get; set; } = new HashSet<ClientTruck>();
-    }
+        }
 
     }

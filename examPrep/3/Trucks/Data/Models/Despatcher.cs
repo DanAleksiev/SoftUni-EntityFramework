@@ -8,6 +8,7 @@ namespace Trucks.Data.Models
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(40)]
         public string Name { get; set; }
 
         public string Position { get; set; }
