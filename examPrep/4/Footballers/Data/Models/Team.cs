@@ -15,6 +15,7 @@ namespace Footballers.Data.Models
         [MaxLength(40)]
         public string Nationality { get; set; }
 
+        [Required]
         public int Trophies { get; set; }
 
         public TeamFootballer TeamsFootballers { get; set; }
