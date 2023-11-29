@@ -97,27 +97,6 @@
     </Trucks>
   </Despatcher>
   <Despatcher TrucksCount="4">
-    <DespatcherName>Atanas Stoyanov</DespatcherName>
-    <Trucks>
-      <Truck>
-        <RegistrationNumber>CT9044HM</RegistrationNumber>
-        <Make>Man</Make>
-      </Truck>
-      <Truck>
-        <RegistrationNumber>CT9047HM</RegistrationNumber>
-        <Make>Mercedes</Make>
-      </Truck>
-      <Truck>
-        <RegistrationNumber>CT9048HM</RegistrationNumber>
-        <Make>Volvo</Make>
-      </Truck>
-      <Truck>
-        <RegistrationNumber>CT9055HM</RegistrationNumber>
-        <Make>Scania</Make>
-      </Truck>
-    </Trucks>
-  </Despatcher>
-  <Despatcher TrucksCount="4">
     <DespatcherName>Dobromir Plamenov</DespatcherName>
     <Trucks>
       <Truck>
@@ -327,19 +306,6 @@
     </Trucks>
   </Despatcher>
   <Despatcher TrucksCount="2">
-    <DespatcherName>Petko Ivanov</DespatcherName>
-    <Trucks>
-      <Truck>
-        <RegistrationNumber>CT3091BB</RegistrationNumber>
-        <Make>Scania</Make>
-      </Truck>
-      <Truck>
-        <RegistrationNumber>CT3119BB</RegistrationNumber>
-        <Make>Mercedes</Make>
-      </Truck>
-    </Trucks>
-  </Despatcher>
-  <Despatcher TrucksCount="2">
     <DespatcherName>Stela Stefanova</DespatcherName>
     <Trucks>
       <Truck>
@@ -385,15 +351,6 @@
       <Truck>
         <RegistrationNumber>CT7122KM</RegistrationNumber>
         <Make>Volvo</Make>
-      </Truck>
-    </Trucks>
-  </Despatcher>
-  <Despatcher TrucksCount="1">
-    <DespatcherName>Ivan Todorov</DespatcherName>
-    <Trucks>
-      <Truck>
-        <RegistrationNumber>CT5635PB</RegistrationNumber>
-        <Make>Scania</Make>
       </Truck>
     </Trucks>
   </Despatcher>

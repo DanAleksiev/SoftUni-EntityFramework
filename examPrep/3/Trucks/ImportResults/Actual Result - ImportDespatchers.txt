@@ -18,12 +18,6 @@ Successfully imported despatcher - Stela Stefanova with 2 trucks.
 Successfully imported despatcher - Ana Ivanova with 1 trucks.
 Invalid data!
 Invalid data!
-Invalid data!
-Invalid data!
-Invalid data!
-Invalid data!
-Successfully imported despatcher - Marina Dimitrieva with 0 trucks.
-Invalid data!
 Successfully imported despatcher - Desislava Hristova with 0 trucks.
 Invalid data!
 Successfully imported despatcher - Kalina Petrova with 0 trucks.
@@ -34,8 +28,6 @@ Successfully imported despatcher - Hristo Ivanov with 5 trucks.
 Invalid data!
 Successfully imported despatcher - Ivan Hristov with 4 trucks.
 Invalid data!
-Invalid data!
-Successfully imported despatcher - Petko Ivanov with 2 trucks.
 Invalid data!
 Successfully imported despatcher - Ivan Petrov with 0 trucks.
 Invalid data!
@@ -58,9 +50,6 @@ Invalid data!
 Successfully imported despatcher - Dobromir Plamenov with 4 trucks.
 Invalid data!
 Invalid data!
-Invalid data!
-Successfully imported despatcher - Atanas Stoyanov with 4 trucks.
-Invalid data!
 Successfully imported despatcher - Miahela Eneva with 2 trucks.
 Invalid data!
 Invalid data!
@@ -76,7 +65,7 @@ Invalid data!
 Invalid data!
 Successfully imported despatcher - Georgi Atanasov with 3 trucks.
 Successfully imported despatcher - Asen Hristov with 4 trucks.
-Successfully imported despatcher - Ivan Todorov with 1 trucks.
+Invalid data!
 Invalid data!
 Invalid data!
 Invalid data!

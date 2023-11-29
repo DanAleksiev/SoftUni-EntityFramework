@@ -46,6 +46,7 @@
                         VinNumber = t.Truck.VinNumber,
                         TankCapacity = t.Truck.TankCapacity,
                         CargoCapacity = t.Truck.CargoCapacity,
+                        CategoryType = t.Truck.CategoryType,
                         MakeType = t.Truck.MakeType,
                         })
                     .OrderBy(t => t.MakeType)

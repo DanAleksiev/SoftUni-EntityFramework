@@ -24,7 +24,7 @@ namespace Trucks.DataProcessor.ImportDto
         [Required]
         [MinLength(8)]
         [MaxLength(8)]
-        [RegularExpression(@"^([A-Z]{2}[0-9]{4}[A-Z]{2})$")]
+        [RegularExpression(@"^[A-Z]{2}[0-9]{4}[A-Z]{2}$")]
         public string RegistrationNumber { get; set; }
 
         [Required]

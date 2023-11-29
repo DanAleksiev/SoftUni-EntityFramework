@@ -30,7 +30,7 @@
 
             foreach (var despatcher in dto)
                 {
-                if (!IsValid(despatcher))
+                if (!IsValid(despatcher)|| String.IsNullOrEmpty(despatcher.Position))
                     {
                     sb.AppendLine(ErrorMessage);
                     continue;
