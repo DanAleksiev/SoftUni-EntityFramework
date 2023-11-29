@@ -20,10 +20,10 @@ namespace Footballers.Data.Models
         public DateTime ContractEndDate { get; set; }
 
         [Required]
-        public Position PositionType { get; set; }
+        public PositionType PositionType { get; set; }
 
         [Required]
-        public BestSkill BestSkillType { get; set; }
+        public BestSkillType BestSkillType { get; set; }
 
         [Required]
         public int CoachId { get; set; }

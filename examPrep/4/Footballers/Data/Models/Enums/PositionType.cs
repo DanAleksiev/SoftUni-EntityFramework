@@ -1,6 +1,6 @@
 ﻿namespace Footballers.Data.Models.Enums
     {
-    public enum Position
+    public enum PositionType
         {
         Goalkeeper,
         Defender,
