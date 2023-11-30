@@ -38,7 +38,8 @@
                         ContractEndDate = f.Footballer.ContractEndDate.ToString("d"),
                         BestSkillType = f.Footballer.BestSkillType,
                         PositionType = f.Footballer.PositionType,
-                        }).ToArray()
+                        })
+                    .ToArray()
                     })
                 .OrderByDescending(t=>t.Foodballers.Count())
                 .ThenBy(t => t.Name)
