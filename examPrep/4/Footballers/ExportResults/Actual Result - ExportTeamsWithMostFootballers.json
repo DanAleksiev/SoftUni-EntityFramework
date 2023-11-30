@@ -1,0 +1,153 @@
+[
+  {
+    "Name": "Manchester City F.C.",
+    "Foodballers": [
+      {
+        "FootballerName": "Erling Haland",
+        "ContractStartDate": "24/07/2020",
+        "ContractEndDate": "28/06/2025",
+        "BestSkillType": "Shoot",
+        "PositionType": "Forward"
+      },
+      {
+        "FootballerName": "Marco Reus",
+        "ContractStartDate": "08/06/2020",
+        "ContractEndDate": "13/05/2025",
+        "BestSkillType": "Pass",
+        "PositionType": "Midfielder"
+      },
+      {
+        "FootballerName": "Nico Schlotterbeck",
+        "ContractStartDate": "25/07/2020",
+        "ContractEndDate": "21/03/2025",
+        "BestSkillType": "Defence",
+        "PositionType": "Defender"
+      },
+      {
+        "FootballerName": "Jan Oblak",
+        "ContractStartDate": "09/06/2020",
+        "ContractEndDate": "03/02/2025",
+        "BestSkillType": "Defence",
+        "PositionType": "Goalkeeper"
+      },
+      {
+        "FootballerName": "Bruno Guimaraes",
+        "ContractStartDate": "21/06/2020",
+        "ContractEndDate": "30/07/2024",
+        "BestSkillType": "Dribble",
+        "PositionType": "Midfielder"
+      }
+    ]
+  },
+  {
+    "Name": "Paris Saint-Germain F.C.",
+    "Foodballers": [
+      {
+        "FootballerName": "Harry Kane",
+        "ContractStartDate": "29/12/2021",
+        "ContractEndDate": "06/02/2026",
+        "BestSkillType": "Shoot",
+        "PositionType": "Forward"
+      },
+      {
+        "FootballerName": "Karim Benzema",
+        "ContractStartDate": "17/06/2020",
+        "ContractEndDate": "22/05/2025",
+        "BestSkillType": "Shoot",
+        "PositionType": "Forward"
+      },
+      {
+        "FootballerName": "Hugo Lloris",
+        "ContractStartDate": "10/06/2020",
+        "ContractEndDate": "19/07/2024",
+        "BestSkillType": "Defence",
+        "PositionType": "Goalkeeper"
+      },
+      {
+        "FootballerName": "Son Heung-Min",
+        "ContractStartDate": "18/06/2020",
+        "ContractEndDate": "09/01/2024",
+        "BestSkillType": "Speed",
+        "PositionType": "Forward"
+      }
+    ]
+  },
+  {
+    "Name": "Liverpool F.C.",
+    "Foodballers": [
+      {
+        "FootballerName": "Alisson",
+        "ContractStartDate": "01/01/2022",
+        "ContractEndDate": "28/08/2026",
+        "BestSkillType": "Defence",
+        "PositionType": "Goalkeeper"
+      },
+      {
+        "FootballerName": "Sadio Mane",
+        "ContractStartDate": "08/06/2020",
+        "ContractEndDate": "02/02/2025",
+        "BestSkillType": "Shoot",
+        "PositionType": "Forward"
+      },
+      {
+        "FootballerName": "Andrew Robertson",
+        "ContractStartDate": "13/06/2021",
+        "ContractEndDate": "30/11/2023",
+        "BestSkillType": "Pass",
+        "PositionType": "Defender"
+      }
+    ]
+  },
+  {
+    "Name": "Olympique Lyonnais",
+    "Foodballers": [
+      {
+        "FootballerName": "Sofiane Boufal",
+        "ContractStartDate": "13/06/2021",
+        "ContractEndDate": "22/07/2025",
+        "BestSkillType": "Pass",
+        "PositionType": "Midfielder"
+      },
+      {
+        "FootballerName": "Bremer",
+        "ContractStartDate": "27/07/2020",
+        "ContractEndDate": "04/09/2024",
+        "BestSkillType": "Defence",
+        "PositionType": "Defender"
+      },
+      {
+        "FootballerName": "Patrik Schick",
+        "ContractStartDate": "06/06/2020",
+        "ContractEndDate": "23/11/2022",
+        "BestSkillType": "Shoot",
+        "PositionType": "Forward"
+      }
+    ]
+  },
+  {
+    "Name": "Tottenham Hotspur F.C.",
+    "Foodballers": [
+      {
+        "FootballerName": "Neymar",
+        "ContractStartDate": "10/06/2021",
+        "ContractEndDate": "04/02/2026",
+        "BestSkillType": "Dribble",
+        "PositionType": "Forward"
+      },
+      {
+        "FootballerName": "Lionel Messi",
+        "ContractStartDate": "21/03/2020",
+        "ContractEndDate": "04/07/2023",
+        "BestSkillType": "Dribble",
+        "PositionType": "Defender"
+      },
+      {
+        "FootballerName": "Wojiech Szczesny",
+        "ContractStartDate": "28/07/2020",
+        "ContractEndDate": "14/01/2023",
+        "BestSkillType": "Defence",
+        "PositionType": "Goalkeeper"
+      }
+    ]
+  }
+]
