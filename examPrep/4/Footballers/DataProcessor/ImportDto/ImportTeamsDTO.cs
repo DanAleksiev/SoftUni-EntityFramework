@@ -8,7 +8,7 @@ namespace Footballers.DataProcessor.ImportDto
         [Required]
         [MinLength(3)]
         [MaxLength(40)]
-        [RegularExpression(@"")]
+        [RegularExpression(@"^[a-zA-Z0-9 .-]+$")]
         public string Name { get; set; }
         [Required]
         [MinLength(2)]

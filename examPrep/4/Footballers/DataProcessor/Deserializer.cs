@@ -51,7 +51,7 @@
                     var startDate = DateTime.Parse(member.ContractStartDate);
                     var endDate = DateTime.Parse(member.ContractEndDate);
 
-                    if(endDate < startDate)
+                    if (endDate < startDate)
                         {
                         sb.AppendLine(ErrorMessage);
                         continue;
@@ -69,7 +69,7 @@
 
                     currentCoach.Footballers.Add(currentFootballer);
                     }
-                sb.AppendLine(string.Format(SuccessfullyImportedCoach,currentCoach.Name,currentCoach.Footballers.Count));
+                sb.AppendLine(string.Format(SuccessfullyImportedCoach, currentCoach.Name, currentCoach.Footballers.Count));
                 coachList.Add(currentCoach);
                 }
 
@@ -80,7 +80,48 @@
 
         public static string ImportTeams(FootballersContext context, string jsonString)
             {
-            throw new NotImplementedException();
+            ImportTeamsDTO[] dto = jsonString.DeserializeFromJson<ImportTeamsDTO[]>();
+
+            StringBuilder sb = new StringBuilder();
+            List<Team> teams = new();
+            var players = context.Footballers.Select(x => x.Id).ToArray();
+
+            foreach (var team in dto)
+                {
+                if (!IsValid(team))
+                    {
+                    sb.AppendLine(ErrorMessage);
+                    continue;
+                    }
+
+                Team currentTeam = new Team()
+                    {
+                    Name = team.Name,
+                    Nationality = team.Nationality,
+                    Trophies = int.Parse(team.Trophies)
+                    };
+
+                foreach (var player in team.Footballers.Distinct())
+                    {
+                    if (!players.Contains(player))
+                        {
+                        sb.AppendLine(ErrorMessage);
+                        continue;
+                        };
+
+                    currentTeam.TeamsFootballers.Add(new TeamFootballer
+                        {
+                        FootballerId = player
+                        });
+                    }
+
+                sb.AppendLine(string.Format(SuccessfullyImportedTeam, currentTeam.Name, currentTeam.TeamsFootballers.Count()));
+                teams.Add(currentTeam);
+                }
+
+            context.Teams.AddRange(teams);
+            context.SaveChanges();
+            return sb.ToString().Trim();
             }
 
         private static bool IsValid(object dto)
