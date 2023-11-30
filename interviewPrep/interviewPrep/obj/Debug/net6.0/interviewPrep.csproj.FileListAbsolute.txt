@@ -1,0 +1,14 @@
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\interviewPrep\interviewPrep\bin\Debug\net6.0\interviewPrep.exe
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\interviewPrep\interviewPrep\bin\Debug\net6.0\interviewPrep.deps.json
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\interviewPrep\interviewPrep\bin\Debug\net6.0\interviewPrep.runtimeconfig.json
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\interviewPrep\interviewPrep\bin\Debug\net6.0\interviewPrep.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\interviewPrep\interviewPrep\bin\Debug\net6.0\interviewPrep.pdb
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\interviewPrep\interviewPrep\obj\Debug\net6.0\interviewPrep.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\interviewPrep\interviewPrep\obj\Debug\net6.0\interviewPrep.AssemblyInfoInputs.cache
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\interviewPrep\interviewPrep\obj\Debug\net6.0\interviewPrep.AssemblyInfo.cs
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\interviewPrep\interviewPrep\obj\Debug\net6.0\interviewPrep.csproj.CoreCompileInputs.cache
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\interviewPrep\interviewPrep\obj\Debug\net6.0\interviewPrep.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\interviewPrep\interviewPrep\obj\Debug\net6.0\refint\interviewPrep.dll
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\interviewPrep\interviewPrep\obj\Debug\net6.0\interviewPrep.pdb
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\interviewPrep\interviewPrep\obj\Debug\net6.0\interviewPrep.genruntimeconfig.cache
+C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\interviewPrep\interviewPrep\obj\Debug\net6.0\ref\interviewPrep.dll

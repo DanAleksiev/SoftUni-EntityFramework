@@ -18,7 +18,7 @@ namespace Footballers.Data.Models
         [Required]
         public int Trophies { get; set; }
 
-        public TeamFootballer TeamsFootballers { get; set; }
+        public ICollection<TeamFootballer> TeamsFootballers { get; set; } = new HashSet<TeamFootballer>();
 
         }
     }
