@@ -14,6 +14,8 @@ namespace CheetSheet
         //ConnectionState: "Server=MSI\\SQLEXPRESS;Database=Exam;Integrated Security=True;MultipleActiveResultSets=true;Encrypt=False";
         static void Main(string[] args)
             {
+
+            //[EnumDataType(typeof(GunType))]
             //CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
 
             //read file

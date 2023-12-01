@@ -2,6 +2,7 @@
     {
     using Artillery.Data;
     using Artillery.Data.Models;
+    using Artillery.Data.Models.Enums;
     using Artillery.DataProcessor.ImportDto;
     using Invoices.Extentions;
     using System.ComponentModel.DataAnnotations;
@@ -84,7 +85,7 @@
                 string countryName = currManu.Founded.Split(", ").LastOrDefault().ToString();
                 names.Add(currManu.ManufacturerName);
                 validM.Add(currManu);
-                sb.AppendLine(string.Format(SuccessfulImportManufacturer, currManu.ManufacturerName,countryName));
+                sb.AppendLine(string.Format(SuccessfulImportManufacturer, currManu.ManufacturerName, countryName));
                 }
 
             context.Manufacturers.AddRange(validM);
@@ -124,7 +125,50 @@
 
         public static string ImportGuns(ArtilleryContext context, string jsonString)
             {
-            throw new NotImplementedException();
+            List<ImportGunsDTO> dto = jsonString.DeserializeFromJson<List<ImportGunsDTO>>();
+
+            StringBuilder sb = new StringBuilder();
+
+            List<Gun> products = new List<Gun>();
+
+            var shells = context.Shells.Select(p => p.Id).ToList();
+            var manu = context.Manufacturers.Select(p => p.Id).ToList();
+
+            foreach (var gun in dto)
+                {
+                if (!IsValid(gun) || !shells.Contains(gun.ShellId) || !manu.Contains(gun.ManufacturerId)|| !Enum.IsDefined(typeof(GunType), gun.GunType))
+                    {
+                    sb.AppendLine(ErrorMessage);
+                    continue;
+                    }
+
+
+                var newProduct = new Gun
+                    {
+                    ManufacturerId = gun.ManufacturerId,
+                    GunWeight = gun.GunWeight,
+                    BarrelLength = gun.BarrelLength,
+                    NumberBuild = gun.NumberBuild,
+                    Range = gun.Range,
+                    GunType = Enum.Parse<GunType>(gun.GunType),
+                    ShellId = gun.ShellId,
+                    };
+
+                foreach (var c in gun.Countries)
+                    {
+                    newProduct.CountriesGuns.Add(new CountryGun
+                        {
+                        CountryId = c.Id,
+                        });
+                    }
+
+                sb.AppendLine(string.Format(SuccessfulImportGun, newProduct.GunType.ToString(), newProduct.GunWeight, newProduct.BarrelLength));
+                products.Add(newProduct);
+
+                }
+            context.Guns.AddRange(products);
+            context.SaveChanges();
+            return sb.ToString().Trim();
             }
         private static bool IsValid(object obj)
             {
