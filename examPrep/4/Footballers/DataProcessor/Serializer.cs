@@ -3,6 +3,7 @@
     using Data;
     using DataProcessor.ExportDto;
     using Invoices.Extentions;
+    using System.Globalization;
 
     public class Serializer
         {
@@ -34,14 +35,14 @@
                     .Select(f => new AllFoodballers()
                         {
                         FootballerName = f.Footballer.Name,
-                        ContractStartDate = f.Footballer.ContractStartDate.ToString("d"),
-                        ContractEndDate = f.Footballer.ContractEndDate.ToString("d"),
+                        ContractStartDate = f.Footballer.ContractStartDate.ToString("d", CultureInfo.InvariantCulture),
+                        ContractEndDate = f.Footballer.ContractEndDate.ToString("d", CultureInfo.InvariantCulture),
                         BestSkillType = f.Footballer.BestSkillType,
                         PositionType = f.Footballer.PositionType,
                         })
                     .ToArray()
                     })
-                .OrderByDescending(t=>t.Foodballers.Count())
+                .OrderByDescending(t=>t.Foodballers.Length)
                 .ThenBy(t => t.Name)
                 .Take(5)
                 .ToArray();

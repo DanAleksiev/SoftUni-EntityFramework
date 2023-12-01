@@ -26,7 +26,7 @@
             List<Coach> coachList = new List<Coach>();
             foreach (var coach in dto)
                 {
-                if (!IsValid(coach))
+                if (!IsValid(coach)||string.IsNullOrEmpty(coach.Nationality))
                     {
                     sb.AppendLine(ErrorMessage);
                     continue;
