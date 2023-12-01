@@ -1,21 +1,30 @@
 ﻿using Footballers.Data.Models.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.Xml.Serialization;
 
 namespace Footballers.DataProcessor.ExportDto
     {
+    [XmlType("Coach")]
     public class ExportCoachesWithTheirFootballersDTO
         {
+        [XmlAttribute("FootballersCount")]
+        public int Count { get; set; }
+
+        [XmlElement("CoachName")]
+        public string CoachName { get; set; }
+
+        [XmlArray("Footballers")]
+        public AllPlayers[] Footballers { get; set; }
+
+        }
+
+    [XmlType("Footballer")]
+    public class AllPlayers
+        {
+        [XmlElement("Name")]
         public string Name { get; set; }
 
-        public AllFoodballers[] Foodballers { get; set; }
-    }
-
-    public class AllFoodballers
-        {
-        public string FootballerName { get; set; }
-        public string ContractStartDate { get; set; }
-        public string ContractEndDate { get; set; }
-        public BestSkillType BestSkillType { get; set; }
-        public PositionType PositionType { get; set; }
-    }
+        [XmlElement("Position")]
+        public string Position { get; set; }
+        }
     }

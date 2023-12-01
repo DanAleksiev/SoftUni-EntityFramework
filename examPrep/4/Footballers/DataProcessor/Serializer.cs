@@ -10,26 +10,37 @@
         public static string ExportCoachesWithTheirFootballers(FootballersContext context)
             {
             var result = context.Coaches
-                .Select(t => new ExportTeamsWithMostFootballersDTO
+                .Where(c => c.Footballers.Any())
+                .Select(t => new ExportCoachesWithTheirFootballersDTO
                     {
+                    Count = t.Footballers.Count(),
                     CoachName = t.Name,
+                    Footballers = t.Footballers.Select(f => new AllPlayers()
+                        {
+                        Name = f.Name,
+                        Position = f.PositionType.ToString(),
+                        })
+                    .OrderBy(p => p.Name)
+                    .ToArray(),
                     })
-                .Take(5)
+                .OrderByDescending(c=> c.Count)
                 .ToArray();
 
-            return "";
+            XmlFormating format = new XmlFormating();
+            return format.Serialize<ExportCoachesWithTheirFootballersDTO[]>(result, "Coaches");
             }
 
         public static string ExportTeamsWithMostFootballers(FootballersContext context, DateTime date)
             {
             var result = context.Teams
                 .Where(x=>x.TeamsFootballers
-                    .Any(p=> p.Footballer.ContractEndDate >= date))
-                .Select(t => new ExportCoachesWithTheirFootballersDTO
+                    .Any(p=> p.Footballer.ContractStartDate >= date))
+                .ToArray()
+                .Select(t => new ExportTeamsWithMostFootballersDTO
                     {
                     Name = t.Name,
                     Foodballers = t.TeamsFootballers
-                    .Where(p => p.Footballer.ContractEndDate >= date)
+                    .Where(p => p.Footballer.ContractStartDate >= date)
                     .OrderByDescending(f=>f.Footballer.ContractEndDate)
                     .ThenBy(f=>f.Footballer.Name)
                     .Select(f => new AllFoodballers()

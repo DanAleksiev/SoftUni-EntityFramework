@@ -6,6 +6,7 @@
     using Footballers.DataProcessor.ImportDto;
     using Invoices.Extentions;
     using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
     using System.Text;
 
     public class Deserializer
@@ -22,8 +23,10 @@
             {
             XmlFormating format = new XmlFormating();
             ImportCoachesDTO[] dto = format.Deserialize<ImportCoachesDTO[]>(xmlString, "Coaches");
+
             StringBuilder sb = new StringBuilder();
             List<Coach> coachList = new List<Coach>();
+
             foreach (var coach in dto)
                 {
                 if (!IsValid(coach)||string.IsNullOrEmpty(coach.Nationality))
@@ -40,16 +43,17 @@
 
                 foreach (var member in coach.Footballers)
                     {
+                    DateTime startDate;
+                    DateTime endDate;
 
-
-                    if (!IsValid(member))
+                    if (!IsValid(member) || !DateTime.TryParseExact(member.ContractStartDate, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate)
+                        || !DateTime.TryParseExact(member.ContractEndDate, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out endDate))
                         {
                         sb.AppendLine(ErrorMessage);
                         continue;
                         }
 
-                    var startDate = DateTime.Parse(member.ContractStartDate);
-                    var endDate = DateTime.Parse(member.ContractEndDate);
+                    
 
                     if (endDate < startDate)
                         {
@@ -88,7 +92,7 @@
 
             foreach (var team in dto)
                 {
-                if (!IsValid(team))
+                if (!IsValid(team) || team.Trophies == "0" || String.IsNullOrEmpty(team.Nationality))
                     {
                     sb.AppendLine(ErrorMessage);
                     continue;
@@ -111,6 +115,7 @@
 
                     currentTeam.TeamsFootballers.Add(new TeamFootballer
                         {
+                        TeamId = currentTeam.Id,
                         FootballerId = player
                         });
                     }
