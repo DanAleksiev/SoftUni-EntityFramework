@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Invoices.Extentions;
 using System.Data;
 using System.Globalization;
+using System.Net;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -70,5 +72,8 @@ namespace CheetSheet
 
             return stringBuilder.ToString();
             }
+
+
+
         }
     }
