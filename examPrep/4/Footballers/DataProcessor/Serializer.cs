@@ -11,6 +11,7 @@
             {
             var result = context.Coaches
                 .Where(c => c.Footballers.Any())
+                .ToArray()
                 .Select(t => new ExportCoachesWithTheirFootballersDTO
                     {
                     Count = t.Footballers.Count(),
