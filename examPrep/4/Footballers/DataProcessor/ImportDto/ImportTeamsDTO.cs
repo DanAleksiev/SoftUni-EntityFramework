@@ -15,7 +15,7 @@ namespace Footballers.DataProcessor.ImportDto
         [MaxLength(40)]
         public string Nationality { get; set; }
         [Required]
-        public string Trophies { get; set; }
+        public int Trophies { get; set; }
 
         public int[] Footballers { get; set; }
     }

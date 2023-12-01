@@ -92,7 +92,7 @@
 
             foreach (var team in dto)
                 {
-                if (!IsValid(team) || team.Trophies == "0" || String.IsNullOrEmpty(team.Nationality))
+                if (!IsValid(team) || team.Trophies == 0 || String.IsNullOrEmpty(team.Nationality))
                     {
                     sb.AppendLine(ErrorMessage);
                     continue;
@@ -102,7 +102,7 @@
                     {
                     Name = team.Name,
                     Nationality = team.Nationality,
-                    Trophies = int.Parse(team.Trophies)
+                    Trophies = team.Trophies
                     };
 
                 foreach (var player in team.Footballers.Distinct())
@@ -115,7 +115,6 @@
 
                     currentTeam.TeamsFootballers.Add(new TeamFootballer
                         {
-                        TeamId = currentTeam.Id,
                         FootballerId = player
                         });
                     }

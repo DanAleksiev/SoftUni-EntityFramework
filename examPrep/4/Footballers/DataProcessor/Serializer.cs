@@ -37,14 +37,14 @@
                 .Where(x=>x.TeamsFootballers
                     .Any(p=> p.Footballer.ContractStartDate >= date))
                 .ToArray()
-                .Select(t => new ExportTeamsWithMostFootballersDTO
+                .Select(t => new
                     {
                     Name = t.Name,
                     Foodballers = t.TeamsFootballers
                     .Where(p => p.Footballer.ContractStartDate >= date)
                     .OrderByDescending(f=>f.Footballer.ContractEndDate)
                     .ThenBy(f=>f.Footballer.Name)
-                    .Select(f => new AllFoodballers()
+                    .Select(f => new 
                         {
                         FootballerName = f.Footballer.Name,
                         ContractStartDate = f.Footballer.ContractStartDate.ToString("d", CultureInfo.InvariantCulture),

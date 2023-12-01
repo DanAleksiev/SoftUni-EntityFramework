@@ -10,9 +10,12 @@ namespace CheetSheet
     {
     internal class Program
         {
-        //ConnectionState: "Server=MSI\\SQLEXPRESS;Database=CarDealerXlm;Integrated Security=True;MultipleActiveResultSets=true;Encrypt=False";
+        
+        //ConnectionState: "Server=MSI\\SQLEXPRESS;Database=Exam;Integrated Security=True;MultipleActiveResultSets=true;Encrypt=False";
         static void Main(string[] args)
             {
+            //CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+
             //read file
             //CarDealerContext context = new CarDealerContext();
             string salesJson = File.ReadAllText("../../../Datasets/sales.json");

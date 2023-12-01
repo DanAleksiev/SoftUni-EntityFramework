@@ -9,7 +9,7 @@ namespace Footballers.DataProcessor.ExportDto
         {
         public string Name { get; set; }
 
-        public AllFoodballers[] Foodballers { get; set; }
+        public AllFoodballers[] Footballers { get; set; }
         }
 
     public class AllFoodballers
