@@ -33,7 +33,7 @@ namespace ProductShop
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(T), xmlRootAttribute);
 
             XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces();
-            namespaces.Add(string.Empty, string.Empty);
+            namespaces.Add( , " 2);
 
             StringBuilder sb = new StringBuilder();
             using StringWriter writer = new StringWriter(sb);
