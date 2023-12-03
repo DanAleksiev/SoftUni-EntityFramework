@@ -64,6 +64,7 @@
 
             context.Patients.AddRange(products);
             context.SaveChanges();
+
             return sb.ToString().TrimEnd();
             }
 
