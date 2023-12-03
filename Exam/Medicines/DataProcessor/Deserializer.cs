@@ -64,7 +64,6 @@
 
             context.Patients.AddRange(products);
             context.SaveChanges();
-
             return sb.ToString().TrimEnd();
             }
 
@@ -107,7 +106,7 @@
                         continue;
                         }
 
-                    if (!IsValid(med)||productionDate >= expiryDate )
+                    if (!IsValid(med)||productionDate >= expiryDate || med.Producer == null)
                         {
                         sb.AppendLine(ErrorMessage);
                         continue;
@@ -118,6 +117,12 @@
                         sb.AppendLine(ErrorMessage);
                         continue;
                         }
+
+                    //if(newPharma.Medicines.Any(m=> m.Name == med.Name && m.Producer == med.Producer))
+                    //    {
+                    //    sb.AppendLine(ErrorMessage);
+                    //    continue;
+                    //    }
 
                     newPharma.Medicines.Add(new Medicine()
                         {
