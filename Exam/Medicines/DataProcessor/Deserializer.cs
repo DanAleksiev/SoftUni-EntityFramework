@@ -1,6 +1,5 @@
 ﻿namespace Medicines.DataProcessor
-{
-    using AutoMapper.Execution;
+    {
     using Invoices.Extentions;
     using Medicines.Data;
     using Medicines.Data.Models;
@@ -8,11 +7,10 @@
     using Medicines.DataProcessor.ImportDtos;
     using System.ComponentModel.DataAnnotations;
     using System.Globalization;
-    using System.Net;
     using System.Text;
 
     public class Deserializer
-    {
+        {
         private const string ErrorMessage = "Invalid Data!";
         private const string SuccessfullyImportedPharmacy = "Successfully imported pharmacy - {0} with {1} medicines.";
         private const string SuccessfullyImportedPatient = "Successfully imported patient - {0} with {1} medicines.";
@@ -68,7 +66,7 @@
             }
 
         public static string ImportPharmacies(MedicinesContext context, string xmlString)
-        {
+            {
             var serialiser = new XmlFormating();
 
             ImportPharmaciesDTO[] dto = serialiser.Deserialize<ImportPharmaciesDTO[]>(xmlString, "Pharmacies");
@@ -77,7 +75,7 @@
             List<Pharmacy> validP = new List<Pharmacy>();
             foreach (var pharma in dto)
                 {
-                var validBool = new[]{ "true", "false" };
+                var validBool = new[] { "true", "false" };
                 if (!IsValid(pharma) || !validBool.Contains(pharma.IsNonStop))
                     {
                     sb.AppendLine(ErrorMessage);
@@ -95,7 +93,6 @@
 
                 foreach (var med in pharma.Medicines.Distinct())
                     {
-                    
                     DateTime productionDate;
                     DateTime expiryDate;
 
@@ -106,13 +103,13 @@
                         continue;
                         }
 
-                    if (!IsValid(med)||productionDate >= expiryDate || med.Producer == null)
+                    if (!IsValid(med) || productionDate >= expiryDate || med.Producer == null)
                         {
                         sb.AppendLine(ErrorMessage);
                         continue;
                         }
 
-                    if(medsInPharma.ContainsKey(med.Name) && medsInPharma[med.Name] == med.Producer)
+                    if (medsInPharma.ContainsKey(med.Name) && medsInPharma[med.Name] == med.Producer)
                         {
                         sb.AppendLine(ErrorMessage);
                         continue;
@@ -136,9 +133,9 @@
                         });
                     medsInPharma[med.Name] = med.Producer;
                     }
-
-                    validP.Add(newPharma);
-                    sb.AppendLine(string.Format(SuccessfullyImportedPharmacy, newPharma.Name, newPharma.Medicines.Count));
+                medsInPharma.Clear();
+                validP.Add(newPharma);
+                sb.AppendLine(string.Format(SuccessfullyImportedPharmacy, newPharma.Name, newPharma.Medicines.Count));
                 }
             context.Pharmacies.AddRange(validP);
             context.SaveChanges();
@@ -146,11 +143,11 @@
             }
 
         private static bool IsValid(object dto)
-        {
+            {
             var validationContext = new ValidationContext(dto);
             var validationResult = new List<ValidationResult>();
 
             return Validator.TryValidateObject(dto, validationContext, validationResult, true);
+            }
         }
     }
-}
