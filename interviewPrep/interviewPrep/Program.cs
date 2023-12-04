@@ -23,81 +23,116 @@ namespace interviewPrep
             int[] sortTheArray = { 10, 4, 6, 1, 2, 5, 7, 8, 3, 9, };
             int[] sortedArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            Console.WriteLine(SortList(sortedArray, sortTheArray));
-            Console.WriteLine(SortedList(sortedArray, sortTheArray));
-            Console.WriteLine(QuickSortAlgorithm(sortedArray, sortTheArray));
+            Console.WriteLine(OrderBy(sortedArray, sortTheArray));
+            Console.WriteLine(QuickSortAlg(sortedArray, sortTheArray));
+            Console.WriteLine(BubbleSortAlg(sortedArray, sortTheArray));
+            Console.WriteLine(InsertionSortAlg(sortedArray, sortTheArray));
 
             }
-
-        private static bool SortedList(int[] sortedArray, int[] sortTheArray)
+        private static string BubbleSortAlg(int[] sortedArray, int[] sortTheArray)
             {
-            int[] unsortedArray = sortTheArray;
             StringBuilder sb = new StringBuilder();
 
             Stopwatch speed = new Stopwatch();
             speed.Start();
 
-            List<int> sortedList = sortTheArray.ToList();
-            sortedList.Sort();
-
-            speed.Stop();
-
-            sb.AppendLine("The array is sorted with Sort List algorithm:");
-            sb.AppendLine($"    It was :{string.Join("", unsortedArray)}");
-            sb.AppendLine($"    Output :{string.Join("", sortTheArray)}");
-            sb.AppendLine($"    Expected :{string.Join("", sortedArray)}");
-            sb.AppendLine($"{speed.ElapsedTicks}");
-            sb.AppendLine($"....................................................");
-            return sb.ToString();
-            }
-
-        private static string SortList(int[] sortedArray, int[] sortTheArray)
-            {
-            int[] unsortedArray = sortTheArray;
-            StringBuilder sb = new StringBuilder();
-
-            Stopwatch speed = new Stopwatch();
-            speed.Start();
-            
-            List<int> sortedList = sortTheArray.ToList();
-            sortedList.Sort();
-
-            speed.Stop();
-
-            sb.AppendLine("The array is sorted with Sort List algorithm:");
-            sb.AppendLine($"    It was :{string.Join("", unsortedArray)}");
-            sb.AppendLine($"    Output :{string.Join("", sortTheArray)}");
-            sb.AppendLine($"    Expected :{string.Join("", sortedArray)}");
-            sb.AppendLine($"{speed.ElapsedTicks}");
-            sb.AppendLine($"....................................................");
-            return sb.ToString();
-            }
-
-        private static string QuickSortAlgorithm(int[] sortedArray, int[] sortTheArray)
-            {
-            StringBuilder sb = new StringBuilder();
-            int[] unsortedArray = sortTheArray;
-
-            Stopwatch speed = new Stopwatch();
-            speed.Start();
-
-            for (int i = 0; i < unsortedArray.Length; i++)
+            for (int i = 0; i < sortTheArray.Length; i++)
                 {
-                for (int j = unsortedArray.Length-1; j > i; j--)
+                for (int j = 0; j < sortTheArray.Length - i - 1; j++)
                     {
-                    if (unsortedArray[i] > unsortedArray[j])
+                    if (sortTheArray[i] > sortTheArray[j])
                         {
-                        int tempJ = unsortedArray[j];
-                        int tempI = unsortedArray[i];
-                        unsortedArray[i] = tempJ;
-                        unsortedArray[j] = tempI;
-                        
+                        int tempI = sortTheArray[j + 1];
+                        sortTheArray[j] = sortTheArray[j + 1];
+                        sortTheArray[j + 1] = tempI;
+                        }
+                    }
+                }
+
+            speed.Stop();
+
+            sb.AppendLine("The array is sorted with BubbleSort algorithm:");
+            sb.AppendLine($"    Output :{string.Join("", sortTheArray)}");
+            sb.AppendLine($"    Expected :{string.Join("", sortedArray)}");
+            sb.AppendLine($"{speed.ElapsedTicks}");
+            sb.AppendLine($"....................................................");
+            return sb.ToString();
+            }
+
+
+        private static string InsertionSortAlg(int[] sortedArray, int[] sortTheArray)
+            {
+            StringBuilder sb = new StringBuilder();
+
+            Stopwatch speed = new Stopwatch();
+            speed.Start();
+
+            for (int i = 0; i < sortTheArray.Length; i++)
+                {
+                int curr = sortTheArray[i];
+                int j = i - 1;
+
+                while (j > -1 && curr < sortTheArray[j])
+                    {
+                    sortTheArray[j + 1] = sortTheArray[j];
+                    j--;
+                    }
+
+                sortTheArray[j + 1] = curr;
+                }
+
+            speed.Stop();
+
+            sb.AppendLine("The array is sorted with InsertionSort algorithm:");
+            sb.AppendLine($"    Output :{string.Join("", sortTheArray)}");
+            sb.AppendLine($"    Expected :{string.Join("", sortedArray)}");
+            sb.AppendLine($"{speed.ElapsedTicks}");
+            sb.AppendLine($"....................................................");
+            return sb.ToString();
+            }
+
+        private static string OrderBy(int[] sortedArray, int[] sortTheArray)
+            {
+            StringBuilder sb = new StringBuilder();
+
+            Stopwatch speed = new Stopwatch();
+            speed.Start();
+
+            sortTheArray = sortTheArray.OrderBy(x => x).ToArray();
+
+            speed.Stop();
+
+            sb.AppendLine("The array is sorted with using .OrderBy():");
+            sb.AppendLine($"    Output :{string.Join("", sortTheArray)}");
+            sb.AppendLine($"    Expected :{string.Join("", sortedArray)}");
+            sb.AppendLine($"{speed.ElapsedTicks}");
+            sb.AppendLine($"....................................................");
+            return sb.ToString();
+            }
+
+        private static string QuickSortAlg(int[] sortedArray, int[] sortTheArray)
+            {
+            StringBuilder sb = new StringBuilder();
+
+            Stopwatch speed = new Stopwatch();
+            speed.Start();
+
+            for (int i = 0; i < sortTheArray.Length; i++)
+                {
+                for (int j = sortTheArray.Length - 1; j > i; j--)
+                    {
+                    if (sortTheArray[i] > sortTheArray[j])
+                        {
+                        int tempJ = sortTheArray[j];
+                        int tempI = sortTheArray[i];
+                        sortTheArray[i] = tempJ;
+                        sortTheArray[j] = tempI;
+
                         }
                     }
                 }
             speed.Stop();
             sb.AppendLine("The array is sorted with Quicksort algorithm:");
-            sb.AppendLine($"    It was :{string.Join("", unsortedArray)}");
             sb.AppendLine($"    Output :{string.Join("", sortTheArray)}");
             sb.AppendLine($"    Expected :{string.Join("", sortedArray)}");
             sb.AppendLine($"{speed.ElapsedTicks}");
