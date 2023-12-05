@@ -27,8 +27,44 @@ namespace interviewPrep
             Console.WriteLine(QuickSortAlg(sortedArray, sortTheArray));
             Console.WriteLine(BubbleSortAlg(sortedArray, sortTheArray));
             Console.WriteLine(InsertionSortAlg(sortedArray, sortTheArray));
+            Console.WriteLine(SelectionSortAlg(sortedArray, sortTheArray));
 
             }
+
+        private static string SelectionSortAlg(int[] sortedArray, int[] sortTheArray)
+            {
+            StringBuilder sb = new StringBuilder();
+
+            Stopwatch speed = new Stopwatch();
+            speed.Start();
+
+            for (int i = 0; i < sortTheArray.Length; i++)
+                {
+                int min = i;
+                for (int j = i + 1; j < sortTheArray.Length; j++)
+                    {
+                    if (sortTheArray[j] < sortTheArray[min])
+                        {
+                        min = j;
+                        }
+                    }
+
+                int temp = sortTheArray[min];
+                sortTheArray[i] = sortTheArray[i];
+                sortTheArray[min] = temp;
+
+                }
+
+            speed.Stop();
+
+            sb.AppendLine("The array is sorted with SelectionSortAlg algorithm:");
+            sb.AppendLine($"    Output :{string.Join("", sortTheArray)}");
+            sb.AppendLine($"    Expected :{string.Join("", sortedArray)}");
+            sb.AppendLine($"{speed.ElapsedTicks}");
+            sb.AppendLine($"....................................................");
+            return sb.ToString();
+            }
+
         private static string BubbleSortAlg(int[] sortedArray, int[] sortTheArray)
             {
             StringBuilder sb = new StringBuilder();
@@ -40,11 +76,11 @@ namespace interviewPrep
                 {
                 for (int j = 0; j < sortTheArray.Length - i - 1; j++)
                     {
-                    if (sortTheArray[i] > sortTheArray[j])
+                    if (sortTheArray[j] > sortTheArray[j + 1])
                         {
                         int tempI = sortTheArray[j + 1];
-                        sortTheArray[j] = sortTheArray[j + 1];
-                        sortTheArray[j + 1] = tempI;
+                        sortTheArray[j + 1] = sortTheArray[j];
+                        sortTheArray[j] = tempI;
                         }
                     }
                 }
