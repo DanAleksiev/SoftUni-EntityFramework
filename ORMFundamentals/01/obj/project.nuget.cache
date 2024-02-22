@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nXl5+JwkUUuR0y0nWBUDqJ1q7zgxLZoox3hLxtyurT9tQg75SfZkyAU48V7Z+1+mtQWPQ/9eWvzoywnaosws+w==",
+  "dgSpecHash": "eqxQyc7TzVjRpwuOk5mz8Z9j7dDWXK9TwJ3x2AeboH5rhFiXWTNGM7hBKgWDtam/8t1FqCtLKssJaUEoQvXhsw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\MyWorkDB\\ORMFundamentals\\01\\01.csproj",
+  "projectFilePath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\ORMFundamentals\\01\\01.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\toksi\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\toksi\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

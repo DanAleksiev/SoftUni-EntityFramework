@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\MyWorkDB\\ORMFundamentals\\01\\01.csproj": {}
+    "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\ORMFundamentals\\01\\01.csproj": {}
   },
   "projects": {
-    "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\MyWorkDB\\ORMFundamentals\\01\\01.csproj": {
+    "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\ORMFundamentals\\01\\01.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\MyWorkDB\\ORMFundamentals\\01\\01.csproj",
+        "projectUniqueName": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\ORMFundamentals\\01\\01.csproj",
         "projectName": "01",
-        "projectPath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\MyWorkDB\\ORMFundamentals\\01\\01.csproj",
+        "projectPath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\ORMFundamentals\\01\\01.csproj",
         "packagesPath": "C:\\Users\\toksi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\MyWorkDB\\ORMFundamentals\\01\\obj\\",
+        "outputPath": "C:\\Users\\toksi\\OneDrive\\Desktop\\SoftUni c#\\DB\\EntityFramework\\ORMFundamentals\\01\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -70,7 +70,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

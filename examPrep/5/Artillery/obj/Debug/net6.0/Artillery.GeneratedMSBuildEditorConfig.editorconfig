@@ -9,3 +9,5 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Artillery
 build_property.ProjectDir = C:\Users\toksi\OneDrive\Desktop\SoftUni c#\DB\EntityFramework\examPrep\5\Artillery\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
